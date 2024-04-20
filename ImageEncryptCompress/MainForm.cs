@@ -25,6 +25,7 @@ namespace ImageEncryptCompress
                 //Open the browsed image and display it
                 string OpenedFilePath = openFileDialog1.FileName;
                 ImageMatrix = ImageOperations.OpenImage(OpenedFilePath);
+                ImageCompression.Compress(ImageMatrix);
                 ImageOperations.DisplayImage(ImageMatrix, pictureBox1);
             }
             txtWidth.Text = ImageOperations.GetWidth(ImageMatrix).ToString();

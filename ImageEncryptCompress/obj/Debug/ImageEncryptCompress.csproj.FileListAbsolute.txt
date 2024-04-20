@@ -9,3 +9,14 @@ D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEnc
 D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
 D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
 D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
+C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.SuggestedBindingRedirects.cache
+C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.MainForm.resources
+C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.Properties.Resources.resources
+C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.GenerateResource.cache
+C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
+C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
+C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe.config
+C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe
+C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.pdb
