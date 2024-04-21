@@ -96,8 +96,4 @@ namespace ImageEncryptCompress
             list.Clear();
         }
     }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
