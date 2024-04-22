@@ -1,2 +1,4 @@
 *.jfm
 *.vsidx
+obj/
+bin/

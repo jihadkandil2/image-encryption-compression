@@ -18,7 +18,7 @@ namespace ImageEncryptCompress
 
         static string CompressedBlue = "";
         static string CompressedRed = "";
-        static string CompressedGreen = "";
+        static string CompressedGreen = ""; 
 
         internal class Node : IComparable
         {

@@ -1,26 +1,3 @@
-D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe.config
-D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe
-D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.pdb
-D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.AssemblyReference.cache
-D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.SuggestedBindingRedirects.cache
-D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.MainForm.resources
-D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.Properties.Resources.resources
-D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.GenerateResource.cache
-D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
-D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
-D:\PROJECT\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
-<<<<<<< Updated upstream
-C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.AssemblyReference.cache
-C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.SuggestedBindingRedirects.cache
-C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.MainForm.resources
-C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.Properties.Resources.resources
-C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.GenerateResource.cache
-C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
-C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
-C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
-C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe.config
-C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe
-C:\Users\Lenovo\Source\Repos\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.pdb
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe.config
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.pdb
@@ -31,15 +8,3 @@ E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Cod
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
-=======
-E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe.config
-E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe
-E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.pdb
-E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.AssemblyReference.cache
-E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.MainForm.resources
-E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.Properties.Resources.resources
-E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.GenerateResource.cache
-E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
-E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
-E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
->>>>>>> Stashed changes
