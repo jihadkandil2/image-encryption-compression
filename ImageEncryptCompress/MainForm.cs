@@ -29,6 +29,12 @@ namespace ImageEncryptCompress
             }
             txtWidth.Text = ImageOperations.GetWidth(ImageMatrix).ToString();
             txtHeight.Text = ImageOperations.GetHeight(ImageMatrix).ToString();
+            RGBPixel[,] image2 = ImageOperations.OpenImage("D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample1Output.bmp");
+
+            RGBPixel[,] output_image = ImageEncryption.Encrypt(ImageMatrix);
+            bool x = ImageOperations.CompareTwoImages(output_image, image2);
+            Console.WriteLine();
+            
         }
 
         private void btnGaussSmooth_Click(object sender, EventArgs e)
