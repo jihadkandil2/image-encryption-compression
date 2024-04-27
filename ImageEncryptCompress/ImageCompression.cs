@@ -110,8 +110,7 @@ namespace ImageEncryptCompress
             SaveTreeIntoFile(binaryWriter, root.right, CompressionEncoding, currCode + '1');
             if (root.left == null && root.right == null)
             {
-                binaryWriter.Write(currCode.ToArray());
-                binaryWriter.Write("#");
+                binaryWriter.Write(currCode);
                 binaryWriter.Write((byte)root.value);
                 CompressionEncoding.Add((byte)root.value, currCode);
             }
@@ -119,27 +118,13 @@ namespace ImageEncryptCompress
         }
         private static void BuildEncodingFromTree(BinaryReader binaryReader,Dictionary<string, byte> DecompressionEncoding)
         {
-            StringBuilder buffer = new StringBuilder();
-            do
+            int leavesNumber = binaryReader.ReadInt32();
+            for(int i = 0; i < leavesNumber; i++)
             {
-                byte x = binaryReader.ReadByte();
-                if (x.ToString().Equals(colorDelimiter))
-                    break;
-                if (x.ToString().Equals(nodeDelimiter))
-                {
-                    buffer.Remove(buffer.Length - 1, 1);//BinaryWriter adds some weird stuff at the end after the buffer is over so we remove it
-                    
-                    string bits = buffer.ToString();
-                    buffer.Clear();
-                    byte symbol = binaryReader.ReadByte();
-                    DecompressionEncoding.Add(bits, symbol);
-
-                }
-                else
-                    buffer.Append(Convert.ToChar(x));
-
-
-            } while (true);
+                string code = binaryReader.ReadString();
+                byte symbol = binaryReader.ReadByte();
+                DecompressionEncoding.Add(code, symbol);
+            }
         }
 
         private static Node BuildTree(RGBPixel[,] Image,Dictionary<byte, string> CompressedEncoding, Dictionary<byte, int> ColorFequency)
@@ -196,27 +181,7 @@ namespace ImageEncryptCompress
             return binaryCode.ToString();
         }
 
-        static KeyValuePair<byte[],int> ConvertToByte(string Binarycode)
-        {
-            int numOfBads = 8 - Binarycode.Length % 8;
-
-            if(numOfBads != 8)
-            {
-                string BadedBits = new string('0', numOfBads);
-                Binarycode += BadedBits;            // Originallength-BadedBits
-            }
-
-            int size = Binarycode.Length / 8;
-            byte[] arr = new byte[size];
-
-            for (int a = 0; a < size; a++)
-            {
-                arr[a] = Convert.ToByte(Binarycode.Substring(a * 8, 8), 2);
-            }
-
-            return new KeyValuePair<byte[],int>(arr,numOfBads);
-        }
-        static KeyValuePair<byte[],int> GetImageComponentBytes(RGBPixel[,] Image,string CompressedBinaryEncoding,char Color)
+        static string GetImageComponentBytes(RGBPixel[,] Image,string CompressedBinaryEncoding,char Color)
         {
             Dictionary<byte, string> CompressionEncoding;
             Func<RGBPixel, byte> colorSelector;
@@ -239,8 +204,19 @@ namespace ImageEncryptCompress
             else
                 throw new Exception("Unavailable color!");
 
-            CompressedBinaryEncoding = ReplaceBinaryCode(Image, CompressionEncoding, colorSelector);
-            return ConvertToByte(CompressedBinaryEncoding);
+            return ReplaceBinaryCode(Image, CompressionEncoding, colorSelector);
+        }
+
+        static int GetNumberOfLeaves(Node node)
+        {
+            if (node == null)
+                return 0;
+            int leaves = 0;
+            leaves += GetNumberOfLeaves(node.left);
+            leaves += GetNumberOfLeaves(node.right);
+            if (node.left == null && node.right == null)
+                return leaves+1;
+            return leaves;
         }
 
         static void SaveImageIntoFile(RGBPixel[,] Image,int RowSize,int ColSize)
@@ -250,64 +226,35 @@ namespace ImageEncryptCompress
             {
                 binaryWriter.Write(RowSize);
                 binaryWriter.Write(ColSize);
+                int NumOfRedLeaves = GetNumberOfLeaves(redRoot);
+                binaryWriter.Write(NumOfRedLeaves);
                 SaveTreeIntoFile(binaryWriter, redRoot,CompressionEncodingRed,"");
-                binaryWriter.Write('-');
+                int NumOfGreenLeaves = GetNumberOfLeaves(greenRoot);
+                binaryWriter.Write(NumOfGreenLeaves);
                 SaveTreeIntoFile(binaryWriter, greenRoot,CompressionEncodingGreen,"");
-                binaryWriter.Write('-');
+                int NumOfBlueLeaves = GetNumberOfLeaves(blueRoot);
+                binaryWriter.Write(NumOfBlueLeaves);
                 SaveTreeIntoFile(binaryWriter,blueRoot,CompressionEncodingBlue,"");
-                binaryWriter.Write('-');
                 
-                KeyValuePair<byte[],int> RedBytes = GetImageComponentBytes(Image,CompressedRed,'r');
-                binaryWriter.Write(RedBytes.Key);
-                binaryWriter.Write('-');
-                binaryWriter.Write(RedBytes.Value);
-
-                KeyValuePair<byte[], int> GreenBytes = GetImageComponentBytes(Image, CompressedGreen,'g') ;
-                binaryWriter.Write(GreenBytes.Key);
-                binaryWriter.Write('-');
-                binaryWriter.Write(GreenBytes.Value);
-
-                KeyValuePair<byte[], int> BlueBytes = GetImageComponentBytes(Image,CompressedBlue,'b');
-                binaryWriter.Write(BlueBytes.Key);
-                binaryWriter.Write('-');
-                binaryWriter.Write(BlueBytes.Value);
+                string RedBits = GetImageComponentBytes(Image,CompressedRed,'r');
+                binaryWriter.Write(RedBits);
+                string GreenBits = GetImageComponentBytes(Image, CompressedGreen,'g') ;
+                binaryWriter.Write(GreenBits);
+                string BlueBits = GetImageComponentBytes(Image,CompressedBlue,'b');
+                binaryWriter.Write(BlueBits);    
             }
 
         }
 
         static void TransformCompressedFileToImage(BinaryReader binaryReader, Dictionary<string, byte> Encoding, RGBPixel[,] Image,char Color)
         {
-            List<byte> buffer = new List<byte>();
-            do
-            {
-                byte x = binaryReader.ReadByte();
-                if (x.ToString().Equals(colorDelimiter))
-                    break;
-                buffer.Add(x);
-            } while (true);
-            //17 : 17+7 = 24
-            int padded = binaryReader.ReadInt32();
-            int totalBitsSize;
-            StringBuilder bitsBuilder = new StringBuilder();
-            foreach (byte b in buffer)
-            {
-                // Convert each byte to its binary representation and append it to the string builder
-                bitsBuilder.Append(Convert.ToString(b, 2).PadLeft(8, '0'));
-            }
-            string bits = bitsBuilder.ToString();
-
-            //BitArray bits = new BitArray(buffer.ToArray());
-            if (padded != 8)
-                totalBitsSize = bits.Length - padded;
-            else
-                totalBitsSize = bits.Length;
+            string bits = binaryReader.ReadString();
+            int totalBitsSize = bits.Length;
             StringBuilder currBits = new StringBuilder();
             string temp = "";
             int pixelRow = 0, pixelCol = 0;
             for (int i = 0; i < totalBitsSize; i++)
             {
-                if(i == totalBitsSize-1)
-                    Console.WriteLine();
                 currBits.Append(bits[i]);//00 01 02 03 .. 0 621
                 temp = currBits.ToString();
                 if (Encoding.ContainsKey(temp))
@@ -365,7 +312,6 @@ namespace ImageEncryptCompress
             DecompressionRedEncoding.Clear();
             DecompressionGreenEncoding.Clear();
             DecompressionBlueEncoding.Clear();
-            compressedFilePath = "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Startup Code\\[TEMPLATE] ImageEncryptCompress\\compressed.bin";
             RGBPixel[,] OriginalImage;
             using (BinaryReader binaryReader = new BinaryReader(new FileStream(compressedFilePath, FileMode.Open), Encoding.ASCII))
             {

@@ -15,35 +15,57 @@ namespace ImageEncryptCompress
             InitializeComponent();
         }
 
-        RGBPixel[,] ImageMatrix;
-
-        private void btnOpen_Click(object sender, EventArgs e)
+        RGBPixel[,] OriginalImage;
+        RGBPixel[,] DecompressedImage;
+        private void compressButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 //Open the browsed image and display it
                 string OpenedFilePath = openFileDialog1.FileName;
-                ImageMatrix = ImageOperations.OpenImage(OpenedFilePath);
-                ImageCompression.Compress(ImageMatrix);
-                ImageOperations.DisplayImage(ImageMatrix, pictureBox1);
+                OriginalImage = ImageOperations.OpenImage(OpenedFilePath);
+                ImageCompression.Compress(OriginalImage);
+                ImageOperations.DisplayImage(OriginalImage, pictureBox1);
             }
-            txtWidth.Text = ImageOperations.GetWidth(ImageMatrix).ToString();
-            txtHeight.Text = ImageOperations.GetHeight(ImageMatrix).ToString();
         }
 
-        private void btnGaussSmooth_Click(object sender, EventArgs e)
+        private void decompressButton_Click(object sender, EventArgs e)
         {
             /*double sigma = double.Parse(txtGaussSigma.Text);
             int maskSize = (int)nudMaskSize.Value ;
             ImageMatrix = ImageOperations.GaussianFilter1D(ImageMatrix, maskSize, sigma);*/
-            RGBPixel[,] NewImageMatrix = ImageCompression.Decompress("");
-            bool x = ImageOperations.CompareTwoImages(NewImageMatrix, ImageMatrix);
-            ImageOperations.DisplayImage(NewImageMatrix, pictureBox2);
-            MessageBox.Show(x + " is the answer");
+            //bool x = ImageOperations.CompareTwoImages(NewImageMatrix, ImageMatrix);
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //Open the browsed image and display it
+                string OpenedFilePath = openFileDialog1.FileName;
+                DecompressedImage = ImageCompression.Decompress(OpenedFilePath);
+                ImageOperations.DisplayImage(DecompressedImage, pictureBox2);
+            }
+
+        }
+        
+        private void comparisonButton_Click(object sender,EventArgs e)
+        {
+            if (OriginalImage == null || DecompressedImage == null)
+            {
+                MessageBox.Show("One of the images is missing!");
+                return;
+            }
+            bool result = ImageOperations.CompareTwoImages(OriginalImage, DecompressedImage);
+            string message;
+            if (result)
+                message = "The compressed and decompressed images are the same!";
+            else
+                message = "The compressed and the decompressed images are not the same!";
+            MessageBox.Show(message);
         }
 
-       
-       
+
+
+
     }
 }
