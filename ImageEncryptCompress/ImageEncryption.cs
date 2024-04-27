@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace ImageEncryptCompress
             string shifted = s.Substring(1);
             return shifted;
         }                                              // 8-6+1 = 1
-        public static string LFSR(string initialSeed = "01100100100", int tapPosition = 8, int k = 5)
+        public static string LFSR(string initialSeed = "10001111", int tapPosition = 6, int k = 5)
         {
             int len = initialSeed.Length;
             for (int i = 0; i < k; i++)
@@ -73,31 +74,20 @@ namespace ImageEncryptCompress
         }
 
 
-        public static int[] Xor(int[] Array , string key)
+        public static byte[] Xor(byte[] ColorArray , string key)
         {
-            int len = Array.Length;
-            int[] resulted_array = new int[len];
+            int len = ColorArray.Length;
+            byte[] Encrypted_color = new byte[len];
             for (int i =0; i < len; i++)
             {
-                int element = Array[i];
-                string binary_of_element = IntToBinaryString(element);  // must be 8 bits
-                                                                        //111001
-                                                                        //110101
-               string final_result = "";
-                int len_key = key.Length;
-               for (int j = 0 ; j < len_key ;j++)
-               {
-                    int key_bit = int.Parse(key[j].ToString());
-                    int element_bit = int.Parse(binary_of_element[j].ToString());
-
-                    int result = key_bit ^ element_bit;
-                    string s = result.ToString();
-                    final_result =string.Concat(final_result, s);
-               }
-                int r = BinaryStringToInt(final_result);
-                resulted_array.Append(r);
+                int element = (int) ColorArray[i]; 
+                
+                int decimalNumberOfKey = Convert.ToInt32(key, 2); 
+                int result = decimalNumberOfKey ^ element;
+              
+                Encrypted_color.Append((byte)result);
             }
-            return resulted_array;
+            return Encrypted_color;
         }
         /// <summary>
         /// 
@@ -113,12 +103,11 @@ namespace ImageEncryptCompress
         /// <exception cref="NotImplementedException"></exception>
         public static RGBPixel[,] Encrypt( RGBPixel[,] Image)
         {
-
-            int height = ImageOperations.GetHeight(Image);
-            int width = ImageOperations.GetWidth(Image);
-            int[] BlueArray = new int[width *height];
-            int[] RedArray = new int[width * height];
-            int[] GreenArray = new int[width * height];
+            int height = ImageOperations.GetHeight(Image); //row
+            int width = ImageOperations.GetWidth(Image);  //col
+            byte[] BlueArray = new byte[width *height];
+            byte[] RedArray = new byte[width * height];
+            byte[] GreenArray = new byte[width * height];
 
             int count = 0; 
             for (int y = 0; y < height ; y++)
@@ -133,8 +122,13 @@ namespace ImageEncryptCompress
                     count++;
                 }
             }
-            string Red_key = LFSR();
+            //we need to access 3 input 
+
+
+
+            string Red_key = LFSR("10001111",6 ,8);
             int index = Red_key.Length - 8;
+
             string R_key = Red_key.Substring(index); 
 
             string Green_key = LFSR(Red_key);
@@ -144,9 +138,9 @@ namespace ImageEncryptCompress
             string B_key = Blue_key.Substring(index);
 
 
-            int[] newRed = new int [width * height];
-            int[] newBlue = new int[width * height];
-            int[] newGreen = new int[width * height];
+            byte[] newRed = new byte[width * height];
+            byte[] newBlue = new byte[width * height];
+            byte[] newGreen = new byte[width * height];
 
             newRed = Xor(RedArray , R_key);
             newBlue= Xor(BlueArray, B_key);
@@ -161,9 +155,9 @@ namespace ImageEncryptCompress
                 {
                     // Access the pixel at position (x, y)
                     RGBPixel pixel = Encrypted_Image[x, y];
-                    pixel.red = (byte) newRed[counter];
-                    pixel.blue = (byte)newBlue[counter];
-                    pixel.green = (byte)newGreen[counter];
+                    pixel.red =  newRed[counter];
+                    pixel.blue = newBlue[counter];
+                    pixel.green =newGreen[counter];
                     counter++;
                 }
             }
@@ -172,6 +166,8 @@ namespace ImageEncryptCompress
         }
         public static RGBPixel[,] Decrypt(RGBPixel[,] Image)
         {
+
+
             throw new NotImplementedException();
         }
     }

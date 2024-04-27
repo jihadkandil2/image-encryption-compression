@@ -106,7 +106,7 @@ namespace ImageEncryptCompress
         /// <returns>Image Height</returns>
         public static int GetHeight(RGBPixel[,] ImageMatrix)
         {
-            return ImageMatrix.GetLength(0);
+            return ImageMatrix.GetLength(0); //row
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace ImageEncryptCompress
         /// <returns>Image Width</returns>
         public static int GetWidth(RGBPixel[,] ImageMatrix)
         {
-            return ImageMatrix.GetLength(1);
+            return ImageMatrix.GetLength(1); //col
         }
 
         /// <summary>
