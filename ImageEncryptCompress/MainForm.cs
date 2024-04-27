@@ -34,10 +34,13 @@ namespace ImageEncryptCompress
 
         private void btnGaussSmooth_Click(object sender, EventArgs e)
         {
-            double sigma = double.Parse(txtGaussSigma.Text);
+            /*double sigma = double.Parse(txtGaussSigma.Text);
             int maskSize = (int)nudMaskSize.Value ;
-            ImageMatrix = ImageOperations.GaussianFilter1D(ImageMatrix, maskSize, sigma);
-            ImageOperations.DisplayImage(ImageMatrix, pictureBox2);
+            ImageMatrix = ImageOperations.GaussianFilter1D(ImageMatrix, maskSize, sigma);*/
+            RGBPixel[,] NewImageMatrix = ImageCompression.Decompress("");
+            bool x = ImageOperations.CompareTwoImages(NewImageMatrix, ImageMatrix);
+            ImageOperations.DisplayImage(NewImageMatrix, pictureBox2);
+            MessageBox.Show(x + " is the answer");
         }
 
        
