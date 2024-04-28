@@ -264,7 +264,10 @@ namespace ImageEncryptCompress
                 for (int j = 0; j < FirstImageWidth; j++)
                 {
                     if (!Image1[i, j].Equals(Image2[i, j]))
+                    {
+                        Image1[i, j].Equals(Image2[i, j]);
                         return false;
+                    }
                 }
             }
 

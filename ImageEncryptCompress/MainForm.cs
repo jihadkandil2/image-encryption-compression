@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -24,9 +25,11 @@ namespace ImageEncryptCompress
             {
                 //Open the browsed image and display it
                 string OpenedFilePath = openFileDialog1.FileName;
+                double sizeBeforeCompressionInKB = (new FileInfo(OpenedFilePath).Length) / (1024.0);
                 OriginalImage = ImageOperations.OpenImage(OpenedFilePath);
-                ImageCompression.Compress(OriginalImage);
+                double sizeAfterCompression = ImageCompression.Compress(OriginalImage);
                 ImageOperations.DisplayImage(OriginalImage, pictureBox1);
+                MessageBox.Show("Compressed from (" +  sizeBeforeCompressionInKB +") KB" + " to (" + sizeAfterCompression + ") KB");
             }
         }
 
