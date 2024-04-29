@@ -7,11 +7,13 @@ Image Compression: Reducing the size of digital images to economize storage or t
 Some Usages:
 
 1.Secured and fast image transmission.
+
 2.Secured image storage .
 
 Project Requirements:
+// will be writen later 
 
-Implementation:
+Implementation requrired:
 1-Image encryption and decryption using LFSR.
 2-Image compression and decompression using Huffman Coding.
 3-Save and load binary encoded and compressed files.
