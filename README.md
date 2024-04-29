@@ -10,8 +10,8 @@ Reducing the size of digital images to economize storage or transmission require
 
 Some Usages:
 
-1.Secured and fast image transmission.
-2.Secured image storage .
+1. Secured and fast image transmission.
+2. Secured image storage .
 
 Project Requirements:
 
