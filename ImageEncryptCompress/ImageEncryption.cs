@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -81,7 +82,7 @@ namespace ImageEncryptCompress
             return result;
         }
 
-
+        //should be deleted
         public static byte[] Xor(byte[] Color_Array , string Color_key)
         {
             int len = Color_Array.Length;
@@ -96,6 +97,13 @@ namespace ImageEncryptCompress
             }
             return Encrypted_color;
         }
+        public static byte XorElement(byte Color_Array, string Color_key)
+        {
+            int decimalNumberOfKey = Convert.ToInt32(Color_key, 2);
+            byte result = (byte) (Color_Array ^ decimalNumberOfKey);
+            return result;
+        }
+
         /// <summary>
         /// 
         /// Steps:-
@@ -115,6 +123,9 @@ namespace ImageEncryptCompress
         /// <exception cref="NotImplementedException"></exception>
         public static RGBPixel[,] Encrypt( RGBPixel[,] Image , string initial_seed="" , int tap_position=8)
         {
+            //ImageOperations.ExtractPixelColors("D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample1.bmp");
+            //ImageOperations.ExtractPixelColors("D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample1Output.bmp");
+
             //[1]-
             int height = ImageOperations.GetHeight(Image); //row
             int width = ImageOperations.GetWidth(Image);  //col
@@ -129,14 +140,51 @@ namespace ImageEncryptCompress
                 for (int x = 0; x < width; x++)//col
                 {
                     // Access the pixel at position (x, y)
-                    BlueArray[count] = Image[x, y].blue;
-                    RedArray[count] = Image[x, y].red;
-                    GreenArray[count] = Image[x, y].green;
+                    BlueArray[count] = Image[y, x].blue;
+                    RedArray[count] = Image[y, x].red;
+                    GreenArray[count] = Image[y, x].green;
                     count++;
                 }
             }
- 
+
+            // for each color pixel will generate new key stream [this is the problem]
+            
+            string seed = initial_seed;
+            string streamKey = "";
+            byte[] newRed = new byte[width * height];
+            byte[] newBlue = new byte[width * height];
+            byte[] newGreen = new byte[width * height];
+      
+            
+            for (int i =0; i< width * height;i++)
+            {
+                seed = LFSR(seed, tap_position, 8);
+                streamKey = Key_stream_generation(seed);
+                newRed[i] = XorElement(RedArray[i], streamKey);
+
+                seed = LFSR(seed, tap_position, 8);
+                streamKey = Key_stream_generation(seed);
+                newGreen[i] = XorElement(GreenArray[i], streamKey);
+
+                seed = LFSR(seed, tap_position, 8);
+                streamKey = Key_stream_generation(seed);
+                newBlue[i] = XorElement(BlueArray[i], streamKey);
+
+            }
+           
+          //  seed = Green_seed;
+            for (int i = 0; i < width * height; i++)
+            {
+                
+            }
+        //    seed = Blue_seed;
+            for (int i = 0; i < width * height; i++)
+            {
+               
+            }
+
             //[2]-
+           /*
             int key_len = 8; // to allow keystream to be always 8 number
             string Red_key = LFSR(initial_seed, tap_position , key_len);
             string Green_key = LFSR(Red_key , tap_position, key_len);
@@ -148,6 +196,7 @@ namespace ImageEncryptCompress
             string B_key_stream = Key_stream_generation(Blue_key);
 
             //[3]-
+
             byte[] newRed = new byte[width * height];
             byte[] newBlue = new byte[width * height];
             byte[] newGreen = new byte[width * height];
@@ -156,7 +205,7 @@ namespace ImageEncryptCompress
             newRed = Xor(RedArray , R_key_stream);
             newGreen = Xor(GreenArray, G_key_stream);
             newBlue = Xor(BlueArray, B_key_stream);
-        
+            */
             //[4]-
             RGBPixel[,] Encrypted_Image = new  RGBPixel[width, height];
             int counter = 0; 
@@ -165,9 +214,10 @@ namespace ImageEncryptCompress
                 for (int x = 0; x < width; x++)
                 {
                     // Access the pixel at position (x, y)
-                    Encrypted_Image[x, y].red = newRed[counter];
-                    Encrypted_Image[x, y].blue = newBlue[counter];
-                    Encrypted_Image[x, y].green = newGreen[counter];
+                    Encrypted_Image[y, x].red = newRed[counter];
+                    Encrypted_Image[y, x].green = newGreen[counter];
+                    Encrypted_Image[y, x].blue = newBlue[counter];
+                    
                     counter++;
                    
                 }

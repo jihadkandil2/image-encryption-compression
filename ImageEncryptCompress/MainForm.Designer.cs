@@ -44,13 +44,18 @@ namespace ImageEncryptCompress
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Encrypt_button = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.initial_seed = new System.Windows.Forms.TextBox();
             this.Label_initial_seed = new System.Windows.Forms.Label();
             this.Label_tap_position = new System.Windows.Forms.Label();
             this.tap_position = new System.Windows.Forms.TextBox();
             this.Decrypt_button = new System.Windows.Forms.Button();
             this.image_status = new System.Windows.Forms.TextBox();
+            this.image_pixels_info = new System.Windows.Forms.RichTextBox();
+            this.LabelForImagePixelsInfo = new System.Windows.Forms.Label();
+            this.Display_image_info = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Display_encrypted_pixels = new System.Windows.Forms.Button();
+            this.result_encrypted_pixels = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaskSize)).BeginInit();
@@ -71,7 +76,7 @@ namespace ImageEncryptCompress
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.White;
-            this.pictureBox2.Location = new System.Drawing.Point(2, 4);
+            this.pictureBox2.Location = new System.Drawing.Point(2, 3);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(412, 360);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -81,7 +86,7 @@ namespace ImageEncryptCompress
             // btnOpen
             // 
             this.btnOpen.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpen.Location = new System.Drawing.Point(355, 417);
+            this.btnOpen.Location = new System.Drawing.Point(183, 425);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(94, 72);
             this.btnOpen.TabIndex = 2;
@@ -102,9 +107,9 @@ namespace ImageEncryptCompress
             // btnGaussSmooth
             // 
             this.btnGaussSmooth.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGaussSmooth.Location = new System.Drawing.Point(471, 417);
+            this.btnGaussSmooth.Location = new System.Drawing.Point(460, 212);
             this.btnGaussSmooth.Name = "btnGaussSmooth";
-            this.btnGaussSmooth.Size = new System.Drawing.Size(98, 72);
+            this.btnGaussSmooth.Size = new System.Drawing.Size(109, 72);
             this.btnGaussSmooth.TabIndex = 5;
             this.btnGaussSmooth.Text = "Apply Operation (Example)";
             this.btnGaussSmooth.UseVisualStyleBackColor = true;
@@ -114,17 +119,18 @@ namespace ImageEncryptCompress
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(591, 430);
+            this.label3.Location = new System.Drawing.Point(591, 212);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 16);
             this.label3.TabIndex = 7;
             this.label3.Text = "Mask Size";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(591, 469);
+            this.label4.Location = new System.Drawing.Point(591, 255);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 16);
             this.label4.TabIndex = 9;
@@ -133,7 +139,7 @@ namespace ImageEncryptCompress
             // txtHeight
             // 
             this.txtHeight.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHeight.Location = new System.Drawing.Point(281, 466);
+            this.txtHeight.Location = new System.Drawing.Point(92, 466);
             this.txtHeight.Name = "txtHeight";
             this.txtHeight.ReadOnly = true;
             this.txtHeight.Size = new System.Drawing.Size(57, 23);
@@ -147,7 +153,7 @@ namespace ImageEncryptCompress
             0,
             0,
             0});
-            this.nudMaskSize.Location = new System.Drawing.Point(685, 428);
+            this.nudMaskSize.Location = new System.Drawing.Point(685, 212);
             this.nudMaskSize.Maximum = new decimal(new int[] {
             99,
             0,
@@ -170,7 +176,7 @@ namespace ImageEncryptCompress
             // txtWidth
             // 
             this.txtWidth.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWidth.Location = new System.Drawing.Point(281, 428);
+            this.txtWidth.Location = new System.Drawing.Point(92, 425);
             this.txtWidth.Name = "txtWidth";
             this.txtWidth.ReadOnly = true;
             this.txtWidth.Size = new System.Drawing.Size(57, 23);
@@ -180,7 +186,7 @@ namespace ImageEncryptCompress
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(226, 431);
+            this.label5.Location = new System.Drawing.Point(37, 428);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 16);
             this.label5.TabIndex = 12;
@@ -190,7 +196,7 @@ namespace ImageEncryptCompress
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(226, 469);
+            this.label6.Location = new System.Drawing.Point(37, 469);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(49, 16);
             this.label6.TabIndex = 13;
@@ -199,7 +205,7 @@ namespace ImageEncryptCompress
             // txtGaussSigma
             // 
             this.txtGaussSigma.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGaussSigma.Location = new System.Drawing.Point(685, 466);
+            this.txtGaussSigma.Location = new System.Drawing.Point(685, 248);
             this.txtGaussSigma.Name = "txtGaussSigma";
             this.txtGaussSigma.Size = new System.Drawing.Size(57, 23);
             this.txtGaussSigma.TabIndex = 14;
@@ -221,7 +227,7 @@ namespace ImageEncryptCompress
             this.panel2.AutoScroll = true;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Location = new System.Drawing.Point(802, 12);
+            this.panel2.Location = new System.Drawing.Point(845, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(421, 371);
             this.panel2.TabIndex = 16;
@@ -237,15 +243,6 @@ namespace ImageEncryptCompress
             this.Encrypt_button.Text = "Encrypt";
             this.Encrypt_button.UseVisualStyleBackColor = true;
             this.Encrypt_button.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(40, 529);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(513, 47);
-            this.textBox1.TabIndex = 18;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // initial_seed
             // 
@@ -299,24 +296,89 @@ namespace ImageEncryptCompress
             // image_status
             // 
             this.image_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.image_status.Location = new System.Drawing.Point(895, 393);
+            this.image_status.Location = new System.Drawing.Point(941, 393);
             this.image_status.Name = "image_status";
             this.image_status.Size = new System.Drawing.Size(246, 35);
             this.image_status.TabIndex = 24;
+            // 
+            // image_pixels_info
+            // 
+            this.image_pixels_info.Location = new System.Drawing.Point(895, 498);
+            this.image_pixels_info.Name = "image_pixels_info";
+            this.image_pixels_info.Size = new System.Drawing.Size(311, 281);
+            this.image_pixels_info.TabIndex = 25;
+            this.image_pixels_info.Text = "";
+            this.image_pixels_info.TextChanged += new System.EventHandler(this.image_pixels_info_TextChanged);
+            // 
+            // LabelForImagePixelsInfo
+            // 
+            this.LabelForImagePixelsInfo.AutoSize = true;
+            this.LabelForImagePixelsInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelForImagePixelsInfo.Location = new System.Drawing.Point(901, 466);
+            this.LabelForImagePixelsInfo.Name = "LabelForImagePixelsInfo";
+            this.LabelForImagePixelsInfo.Size = new System.Drawing.Size(186, 24);
+            this.LabelForImagePixelsInfo.TabIndex = 26;
+            this.LabelForImagePixelsInfo.Text = "Original Image pixels";
+            // 
+            // Display_image_info
+            // 
+            this.Display_image_info.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Display_image_info.Location = new System.Drawing.Point(1112, 455);
+            this.Display_image_info.Name = "Display_image_info";
+            this.Display_image_info.Size = new System.Drawing.Size(94, 37);
+            this.Display_image_info.TabIndex = 27;
+            this.Display_image_info.Text = "Display";
+            this.Display_image_info.UseVisualStyleBackColor = true;
+            this.Display_image_info.Click += new System.EventHandler(this.Display_image_info_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(1249, 469);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(212, 24);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Encrypted Image pixels \r\n";
+            // 
+            // Display_encrypted_pixels
+            // 
+            this.Display_encrypted_pixels.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Display_encrypted_pixels.Location = new System.Drawing.Point(1462, 460);
+            this.Display_encrypted_pixels.Name = "Display_encrypted_pixels";
+            this.Display_encrypted_pixels.Size = new System.Drawing.Size(94, 37);
+            this.Display_encrypted_pixels.TabIndex = 29;
+            this.Display_encrypted_pixels.Text = "Display";
+            this.Display_encrypted_pixels.UseVisualStyleBackColor = true;
+            this.Display_encrypted_pixels.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // result_encrypted_pixels
+            // 
+            this.result_encrypted_pixels.Location = new System.Drawing.Point(1245, 501);
+            this.result_encrypted_pixels.Name = "result_encrypted_pixels";
+            this.result_encrypted_pixels.Size = new System.Drawing.Size(311, 281);
+            this.result_encrypted_pixels.TabIndex = 30;
+            this.result_encrypted_pixels.Text = "";
+            this.result_encrypted_pixels.TextChanged += new System.EventHandler(this.result_encrypted_pixels_TextChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(1245, 710);
+            this.ClientSize = new System.Drawing.Size(1650, 1027);
+            this.Controls.Add(this.result_encrypted_pixels);
+            this.Controls.Add(this.Display_encrypted_pixels);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Display_image_info);
+            this.Controls.Add(this.LabelForImagePixelsInfo);
+            this.Controls.Add(this.image_pixels_info);
             this.Controls.Add(this.image_status);
             this.Controls.Add(this.Decrypt_button);
             this.Controls.Add(this.tap_position);
             this.Controls.Add(this.Label_tap_position);
             this.Controls.Add(this.Label_initial_seed);
             this.Controls.Add(this.initial_seed);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.Encrypt_button);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -333,6 +395,7 @@ namespace ImageEncryptCompress
             this.Controls.Add(this.btnOpen);
             this.Name = "MainForm";
             this.Text = "Image Enctryption and Compression...";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaskSize)).EndInit();
@@ -363,13 +426,18 @@ namespace ImageEncryptCompress
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button Encrypt_button;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox initial_seed;
         private System.Windows.Forms.Label Label_initial_seed;
         private System.Windows.Forms.Label Label_tap_position;
         private System.Windows.Forms.TextBox tap_position;
         private System.Windows.Forms.Button Decrypt_button;
         private System.Windows.Forms.TextBox image_status;
+        private System.Windows.Forms.RichTextBox image_pixels_info;
+        private System.Windows.Forms.Label LabelForImagePixelsInfo;
+        private System.Windows.Forms.Button Display_image_info;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button Display_encrypted_pixels;
+        private System.Windows.Forms.RichTextBox result_encrypted_pixels;
     }
 }
 

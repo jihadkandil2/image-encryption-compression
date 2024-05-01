@@ -38,8 +38,8 @@ namespace ImageEncryptCompress
             new EncryptionTestCase(
                 "1110001011",  // 10- 8+1
                 8,
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample2.bmp",
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample2Output.bmp"),
+                "D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample2.bmp",
+                "D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample2Output.bmp"),
 
             new EncryptionTestCase(
                 "01101000010",
@@ -71,11 +71,14 @@ namespace ImageEncryptCompress
         {
             foreach (var testCase in testCases)
             {
+
                 RGBPixel[,] inputImage = ImageOperations.OpenImage(testCase.InputImagePath);
                 RGBPixel[,] expectedOutputImage = ImageOperations.OpenImage(testCase.OutputImagePath);
                 RGBPixel[,] actualOutputImage = ImageEncryption.Encrypt(inputImage);
                 if (ImageOperations.CompareTwoImages(expectedOutputImage, actualOutputImage))
+                {
                     Console.WriteLine($"SAMPLE {testCase.InputImagePath} ENCRYPTION SUCCESS!");
+                }   
                 else
                     Console.WriteLine($"SAMPLE {testCase.InputImagePath} ENCRYPTION FAIL!");
             }

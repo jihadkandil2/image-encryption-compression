@@ -4,6 +4,7 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+
 ///Algorithms Project
 ///Intelligent Scissors
 ///
@@ -156,15 +157,15 @@ namespace ImageEncryptCompress
             }
             PicBox.Image = ImageBMP;
         }
+       
 
-
-       /// <summary>
-       /// Apply Gaussian smoothing filter to enhance the edge detection 
-       /// </summary>
-       /// <param name="ImageMatrix">Colored image matrix</param>
-       /// <param name="filterSize">Gaussian mask size</param>
-       /// <param name="sigma">Gaussian sigma</param>
-       /// <returns>smoothed color image</returns>
+        /// <summary>
+        /// Apply Gaussian smoothing filter to enhance the edge detection 
+        /// </summary>
+        /// <param name="ImageMatrix">Colored image matrix</param>
+        /// <param name="filterSize">Gaussian mask size</param>
+        /// <param name="sigma">Gaussian sigma</param>
+        /// <returns>smoothed color image</returns>
         public static RGBPixel[,] GaussianFilter1D(RGBPixel[,] ImageMatrix, int filterSize, double sigma)
         {
             int Height = GetHeight(ImageMatrix);
@@ -264,7 +265,10 @@ namespace ImageEncryptCompress
                 for (int j = 0; j < FirstImageWidth; j++)
                 {
                     if (!Image1[i, j].Equals(Image2[i, j]))
+                    {
                         return false;
+                    }
+                       
                 }
             }
 

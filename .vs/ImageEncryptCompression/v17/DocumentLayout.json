@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\imageencryptcompress\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|solutionrelative:imageencryptcompress\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\imageencryptcompress\\imageencryptiontest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|solutionrelative:imageencryptcompress\\imageencryptiontest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|d:\\collegue\\6th semester\\algorithm\\project\\proj\\image-encryption-compression\\imageencryptcompress\\imageencryption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\imageencryptcompress\\imageencryption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|solutionrelative:imageencryptcompress\\imageencryption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\imageencryptcompress\\imageoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|solutionrelative:imageencryptcompress\\imageoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|d:\\collegue\\6th semester\\algorithm\\project\\proj\\image-encryption-compression\\imageencryptcompress\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|solutionrelative:imageencryptcompress\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageEncryptCompress\\ImageEncryptCompress.csproj|D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\imageencryptcompress\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -46,52 +46,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "MainForm.cs",
               "DocumentMoniker": "D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\ImageEncryptCompress\\MainForm.cs",
               "RelativeDocumentMoniker": "ImageEncryptCompress\\MainForm.cs",
               "ToolTip": "D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\ImageEncryptCompress\\MainForm.cs",
               "RelativeToolTip": "ImageEncryptCompress\\MainForm.cs",
-              "ViewState": "AQIAAFcAAAAAAAAAAAAewGoAAAAcAAAA",
+              "ViewState": "AQIAAGMAAAAAAAAAAAAIwHMAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-27T14:46:53.015Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "ImageOperations.cs",
               "DocumentMoniker": "D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\ImageEncryptCompress\\ImageOperations.cs",
               "RelativeDocumentMoniker": "ImageEncryptCompress\\ImageOperations.cs",
               "ToolTip": "D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\ImageEncryptCompress\\ImageOperations.cs",
               "RelativeToolTip": "ImageEncryptCompress\\ImageOperations.cs",
-              "ViewState": "AQIAAGgAAAAAAAAAAAAiwGgAAAAnAAAA",
+              "ViewState": "AQIAAJ8AAAAAAAAAAAAowAwBAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-27T14:55:00.81Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "ImageEncryptionTest.cs",
               "DocumentMoniker": "D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\ImageEncryptCompress\\ImageEncryptionTest.cs",
               "RelativeDocumentMoniker": "ImageEncryptCompress\\ImageEncryptionTest.cs",
               "ToolTip": "D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\ImageEncryptCompress\\ImageEncryptionTest.cs",
               "RelativeToolTip": "ImageEncryptCompress\\ImageEncryptionTest.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAApwCAAAAAZAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAxwC0AAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-25T22:36:49.929Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "ImageEncryption.cs",
               "DocumentMoniker": "D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\ImageEncryptCompress\\ImageEncryption.cs",
               "RelativeDocumentMoniker": "ImageEncryptCompress\\ImageEncryption.cs",
               "ToolTip": "D:\\Collegue\\6th semester\\Algorithm\\Project\\Proj\\image-encryption-compression\\ImageEncryptCompress\\ImageEncryption.cs",
               "RelativeToolTip": "ImageEncryptCompress\\ImageEncryption.cs",
-              "ViewState": "AQIAAJoAAAAAAAAAAIAwwJ8AAAASAAAA",
+              "ViewState": "AQIAAMsAAAAAAAAAAAAgwNEAAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-20T20:48:40.997Z",
               "EditorCaption": ""

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
@@ -85,13 +86,11 @@ namespace ImageEncryptCompress
             try
             {
                  intValue = int.Parse(userInput_tap_position);
-                ///just for checking :can be deleted later
-                MessageBox.Show("Parsed integer value: " + intValue);
+            
             }
             catch (FormatException)
             {
-                ///just for checking :can be deleted later
-                MessageBox.Show("Invalid input. Please enter a valid integer.");
+           
             }
 
             RGBPixel[,] encryptedImage = ImageEncryption.Encrypt(ImageMatrix , userInput_initial_seed, intValue);
@@ -101,9 +100,19 @@ namespace ImageEncryptCompress
             currentStatus = ImageStatus.Encrypted;
             UpdateImageStatus(currentStatus);
             ImageOperations.DisplayImage(encryptedImage, pictureBox2);
+            string imagePath= "D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample2Output.bmp";
             
-
-            RGBPixel[,] stored_encrypted_image = ImageOperations.OpenImage("D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample1Output.bmp");
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp|All files (*.*)|*.*";
+               
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                     imagePath = openFileDialog.FileName;
+                }
+            }
+            
+            RGBPixel[,] stored_encrypted_image = ImageOperations.OpenImage(imagePath);
             bool imagesMatch = ImageOperations.CompareTwoImages(encryptedImage, stored_encrypted_image);
             // Display the result in a message box
             if (imagesMatch == true)
@@ -143,6 +152,163 @@ namespace ImageEncryptCompress
             // Update the status to "Decrypted"
             currentStatus = ImageStatus.Decrypted;
             UpdateImageStatus(currentStatus);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        //--------------------------------------------------------------------------------------------------
+        private void ClearRichTextBoxOriginalImage()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((Action)(() => image_pixels_info.Clear()));
+                //Invoke((Action)(() => result_encrypted_pixels.Clear()));
+            }
+            else
+            {
+                image_pixels_info.Clear();
+                //   result_encrypted_pixels.Clear();
+            }
+        }
+        private void AppendTextSafeOriginalImage(string text)
+        {
+            if (InvokeRequired)
+            {
+                Invoke((Action)(() => image_pixels_info.AppendText(text)));
+                //  Invoke((Action)(() => result_encrypted_pixels.AppendText(text)));
+            }
+            else
+            {
+                image_pixels_info.AppendText(text);
+                //   result_encrypted_pixels.AppendText(text);
+            }
+        }
+        public  void ExtractPixelColorsOriginalImage(string imagePath)
+        {
+            // Load the image
+            Bitmap image = new Bitmap(imagePath);
+
+            // Clear previous content in RichTextBox
+            ClearRichTextBoxOriginalImage();
+
+
+            // Display pixel colors
+            for (int y = 0; y < image.Height; y++)
+            {
+                for (int x = 0; x < image.Width; x++)
+                {
+                    Color pixelColor = image.GetPixel(x, y);
+                    AppendTextSafeOriginalImage($"Pixel at ({x}, {y}): R={pixelColor.R}, G={pixelColor.G}, B={pixelColor.B}\n");
+                }
+            }
+            MessageBox.Show("Pixels are displayed");
+            // Dispose the image
+            image.Dispose();
+        }
+
+
+        //helper 
+       
+      
+        private void ClearRichTextBoxEncryptedImage()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((Action)(() => image_pixels_info.Clear()));
+                //Invoke((Action)(() => result_encrypted_pixels.Clear()));
+            }
+            else
+            {
+                image_pixels_info.Clear();
+                //   result_encrypted_pixels.Clear();
+            }
+        }
+        private void AppendTextSafeEncryptedImage(string text)
+        {
+            if (InvokeRequired)
+            {
+                //Invoke((Action)(() => image_pixels_info.AppendText(text)));
+                  Invoke((Action)(() => result_encrypted_pixels.AppendText(text)));
+            }
+            else
+            {
+                //image_pixels_info.AppendText(text);
+                   result_encrypted_pixels.AppendText(text);
+            }
+        }
+        public void ExtractPixelColorsEncryptedImage(string imagePath)
+        {
+            // Load the image
+            Bitmap image = new Bitmap(imagePath);
+
+            // Clear previous content in RichTextBox
+            ClearRichTextBoxEncryptedImage();
+
+
+            // Display pixel colors
+            for (int y = 0; y < image.Height; y++)
+            {
+                for (int x = 0; x < image.Width; x++)
+                {
+                    Color pixelColor = image.GetPixel(x, y);
+                    AppendTextSafeEncryptedImage($"Pixel at ({x}, {y}): R={pixelColor.R}, G={pixelColor.G}, B={pixelColor.B}\n");
+                }
+            }
+            MessageBox.Show("Encrypted Pixels are displayed succsesfully");
+            // Dispose the image
+            image.Dispose();
+        }
+        private async void button1_Click_1(object sender, EventArgs e)  // display pixels of encrypted 
+        {
+            // Open file dialog to select an image
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp|All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string imagePath = openFileDialog.FileName;
+
+                    // Call the function to extract pixel colors and display them
+                    await Task.Run(() => ExtractPixelColorsEncryptedImage(imagePath));
+                }
+            }
+        }
+
+        
+        private async void Display_image_info_Click(object sender, EventArgs e) //  display pixels original image
+        {
+            // Open file dialog to select an image
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp|All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string imagePath = openFileDialog.FileName;
+
+                    // Call the function to extract pixel colors and display them
+                    await Task.Run(() => ExtractPixelColorsOriginalImage(imagePath));
+                }
+            }
+        }
+
+        private void image_pixels_info_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+       
+        private void result_encrypted_pixels_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
