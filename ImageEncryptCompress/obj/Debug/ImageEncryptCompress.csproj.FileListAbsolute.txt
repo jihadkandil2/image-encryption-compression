@@ -29,3 +29,13 @@ E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Cod
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
+D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe.config
+D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe
+D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.pdb
+D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.AssemblyReference.cache
+D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.MainForm.resources
+D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.Properties.Resources.resources
+D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.GenerateResource.cache
+D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
+D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
+D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb

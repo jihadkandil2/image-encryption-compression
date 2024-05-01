@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ImageEncryptCompress
 {
@@ -13,54 +14,60 @@ namespace ImageEncryptCompress
         public string InputImagePath;
         public string OutputImagePath;
 
-        public EncryptionTestCase(string initialSeed, int tapPosition, string inputImagePath, string outputImagePath)
+        public EncryptionTestCase(string initialSeed, int tapPosition)
         {
             InitialSeed = initialSeed;
             TapPosition = tapPosition;
-            InputImagePath = inputImagePath;
-            OutputImagePath = outputImagePath;
+            InputImagePath = getPath();
+            OutputImagePath = getPath();
+        }
+        public string getPath()
+        {
+            string imagePath = "";
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp|All files (*.*)|*.*";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    imagePath = openFileDialog.FileName;
+                }
+            }
+            return imagePath;
         }
     }
     internal class ImageEncryptionTest
     {
+
         private static readonly EncryptionTestCase[] testCases = new EncryptionTestCase[]
-            {
-            new EncryptionTestCase(
-                "10001111",
-                6,
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample1.bmp",
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample1Output.bmp"),
+        {
+            new EncryptionTestCase(  //sample 1
+                "10001111",   
+                6
+                ),
 
-            new EncryptionTestCase(
-                "1110001011",  // 10- 8+1
-                8,
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample2.bmp",
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample2Output.bmp"),
+            new EncryptionTestCase(   //sample 2
+                "1110001011",  
+                8
+                ),
 
-            new EncryptionTestCase(
+            new EncryptionTestCase( //sample 3
                 "01101000010",
-                2,
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample3.bmp",
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample3Output.bmp"),
+                2),
 
-            new EncryptionTestCase(
+            new EncryptionTestCase( //sample 4
                 "011010000101001",
-                10,
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample4.bmp",
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample4Output.bmp"),
+                10
+                ),
 
-            new EncryptionTestCase(
+            new EncryptionTestCase( //sample 5
                 "01101000010100010000",
-                16,
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample5.bmp",
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample5Output.bmp"),
+                16),
 
-            new EncryptionTestCase(
+            new EncryptionTestCase(  //sample 6
                 "10011100",
-                0,
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample6.bmp",
-                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample6Output.bmp")
-            };
+                0)
+        };
 
         public ImageEncryptionTest()
         {
