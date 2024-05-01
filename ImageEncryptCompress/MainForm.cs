@@ -148,10 +148,52 @@ namespace ImageEncryptCompress
         private void Decrypt_button_Click(object sender, EventArgs e)
         {
 
+            string userInput_initial_seed = initial_seed.Text;
+            string userInput_tap_position = tap_position.Text;
+            int intValue = 8;
+            try
+            {
+                intValue = int.Parse(userInput_tap_position);
 
+            }
+            catch (FormatException)
+            {
+
+            }
             // Update the status to "Decrypted"
             currentStatus = ImageStatus.Decrypted;
             UpdateImageStatus(currentStatus);
+            
+            RGBPixel[,] ActualImage = ImageEncryption.Decrypt(ImageMatrix, userInput_initial_seed, intValue);
+            ImageOperations.DisplayImage(ActualImage, pictureBox2);
+
+
+            string imagePath = "";
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp|All files (*.*)|*.*";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    imagePath = openFileDialog.FileName;
+                }
+            }
+
+            RGBPixel[,] OriginalImage = ImageOperations.OpenImage(imagePath);
+
+
+
+            bool imagesMatch = ImageOperations.CompareTwoImages(ActualImage, OriginalImage);
+            // Display the result in a message box
+            if (imagesMatch == true)
+            {
+                MessageBox.Show("The images match!", "Image Comparison Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("The images do not match!", "Image Comparison Result", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         private void label3_Click(object sender, EventArgs e)

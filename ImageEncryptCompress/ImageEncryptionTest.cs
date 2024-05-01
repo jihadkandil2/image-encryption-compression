@@ -23,23 +23,19 @@ namespace ImageEncryptCompress
     }
     internal class ImageEncryptionTest
     {
-        private readonly EncryptionTestCase[] testCases;
-
-        public ImageEncryptionTest()
-        {
-            testCases = new EncryptionTestCase[]
+        private static readonly EncryptionTestCase[] testCases = new EncryptionTestCase[]
             {
             new EncryptionTestCase(
                 "10001111",
                 6,
-                "D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample1.bmp\\",
-                "D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample1Output.bmp"),
+                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample1.bmp",
+                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample1Output.bmp"),
 
             new EncryptionTestCase(
                 "1110001011",  // 10- 8+1
                 8,
-                "D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample2.bmp",
-                "D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample2Output.bmp"),
+                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample2.bmp",
+                "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample2Output.bmp"),
 
             new EncryptionTestCase(
                 "01101000010",
@@ -54,7 +50,7 @@ namespace ImageEncryptCompress
                 "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample4Output.bmp"),
 
             new EncryptionTestCase(
-                "011010000101001",
+                "01101000010100010000",
                 16,
                 "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample5.bmp",
                 "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample5Output.bmp"),
@@ -65,23 +61,33 @@ namespace ImageEncryptCompress
                 "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample6.bmp",
                 "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample6Output.bmp")
             };
+
+        public ImageEncryptionTest()
+        {
+            
         }
 
-        public void TestSamples()
+        static public void TestSamples()
         {
+            List<bool> results = new List<bool>();
             foreach (var testCase in testCases)
             {
 
                 RGBPixel[,] inputImage = ImageOperations.OpenImage(testCase.InputImagePath);
                 RGBPixel[,] expectedOutputImage = ImageOperations.OpenImage(testCase.OutputImagePath);
-                RGBPixel[,] actualOutputImage = ImageEncryption.Encrypt(inputImage);
+                RGBPixel[,] actualOutputImage = ImageEncryption.Encrypt(inputImage,testCase.InitialSeed,testCase.TapPosition);
                 if (ImageOperations.CompareTwoImages(expectedOutputImage, actualOutputImage))
                 {
                     Console.WriteLine($"SAMPLE {testCase.InputImagePath} ENCRYPTION SUCCESS!");
-                }   
+                    results.Add(true);
+                }
                 else
+                {
                     Console.WriteLine($"SAMPLE {testCase.InputImagePath} ENCRYPTION FAIL!");
+                    results.Add(false);
+                }
             }
+            Console.WriteLine();
         }
     }
 }

@@ -207,7 +207,7 @@ namespace ImageEncryptCompress
             newBlue = Xor(BlueArray, B_key_stream);
             */
             //[4]-
-            RGBPixel[,] Encrypted_Image = new  RGBPixel[width, height];
+            RGBPixel[,] Encrypted_Image = new  RGBPixel[height, width];
             int counter = 0; 
             for (int y = 0; y < height; y++)
             {
@@ -225,11 +225,11 @@ namespace ImageEncryptCompress
 
             return Encrypted_Image;
         }
-        public static RGBPixel[,] Decrypt(RGBPixel[,] Image)
+        public static RGBPixel[,] Decrypt(RGBPixel[,] Image,string initialSeed,int tapPosition)
         {
+            
+            return Encrypt(Image,initialSeed,tapPosition);
 
-
-            throw new NotImplementedException();
         }
     }
 }

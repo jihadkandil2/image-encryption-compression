@@ -19,3 +19,13 @@ D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression\Ima
 D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
 D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
 D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
+E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe.config
+E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe
+E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.pdb
+E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.AssemblyReference.cache
+E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.MainForm.resources
+E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.Properties.Resources.resources
+E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.GenerateResource.cache
+E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
+E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
+E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
