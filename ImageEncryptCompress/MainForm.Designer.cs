@@ -33,10 +33,6 @@ namespace ImageEncryptCompress
             this.btnOpen = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.compareImagesButton = new System.Windows.Forms.Button();
-            this.txtHeight = new System.Windows.Forms.TextBox();
-            this.txtWidth = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Encrypt_button = new System.Windows.Forms.Button();
@@ -45,6 +41,9 @@ namespace ImageEncryptCompress
             this.Label_tap_position = new System.Windows.Forms.Label();
             this.tap_position = new System.Windows.Forms.TextBox();
             this.Decrypt_button = new System.Windows.Forms.Button();
+            this.Compressbtn = new System.Windows.Forms.Button();
+            this.CompressExistedImage = new System.Windows.Forms.RadioButton();
+            this.Decompressbtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -95,51 +94,13 @@ namespace ImageEncryptCompress
             // compareImagesButton
             // 
             this.compareImagesButton.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.compareImagesButton.Location = new System.Drawing.Point(549, 231);
+            this.compareImagesButton.Location = new System.Drawing.Point(584, 267);
             this.compareImagesButton.Name = "compareImagesButton";
             this.compareImagesButton.Size = new System.Drawing.Size(109, 72);
             this.compareImagesButton.TabIndex = 5;
             this.compareImagesButton.Text = "Compare Images";
             this.compareImagesButton.UseVisualStyleBackColor = true;
             this.compareImagesButton.Click += new System.EventHandler(this.CompareImagesButton_Click);
-            // 
-            // txtHeight
-            // 
-            this.txtHeight.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHeight.Location = new System.Drawing.Point(92, 466);
-            this.txtHeight.Name = "txtHeight";
-            this.txtHeight.ReadOnly = true;
-            this.txtHeight.Size = new System.Drawing.Size(57, 23);
-            this.txtHeight.TabIndex = 8;
-            // 
-            // txtWidth
-            // 
-            this.txtWidth.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWidth.Location = new System.Drawing.Point(92, 425);
-            this.txtWidth.Name = "txtWidth";
-            this.txtWidth.ReadOnly = true;
-            this.txtWidth.Size = new System.Drawing.Size(57, 23);
-            this.txtWidth.TabIndex = 11;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(37, 428);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 16);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Width";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(37, 469);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 16);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "Height";
             // 
             // panel1
             // 
@@ -165,7 +126,7 @@ namespace ImageEncryptCompress
             // Encrypt_button
             // 
             this.Encrypt_button.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Encrypt_button.Location = new System.Drawing.Point(475, 140);
+            this.Encrypt_button.Location = new System.Drawing.Point(510, 176);
             this.Encrypt_button.Name = "Encrypt_button";
             this.Encrypt_button.Size = new System.Drawing.Size(94, 37);
             this.Encrypt_button.TabIndex = 17;
@@ -176,7 +137,7 @@ namespace ImageEncryptCompress
             // initial_seed
             // 
             this.initial_seed.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.initial_seed.Location = new System.Drawing.Point(623, 34);
+            this.initial_seed.Location = new System.Drawing.Point(658, 70);
             this.initial_seed.Name = "initial_seed";
             this.initial_seed.Size = new System.Drawing.Size(155, 24);
             this.initial_seed.TabIndex = 19;
@@ -185,7 +146,7 @@ namespace ImageEncryptCompress
             // 
             this.Label_initial_seed.AutoSize = true;
             this.Label_initial_seed.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_initial_seed.Location = new System.Drawing.Point(456, 29);
+            this.Label_initial_seed.Location = new System.Drawing.Point(491, 65);
             this.Label_initial_seed.Name = "Label_initial_seed";
             this.Label_initial_seed.Size = new System.Drawing.Size(161, 24);
             this.Label_initial_seed.TabIndex = 20;
@@ -195,7 +156,7 @@ namespace ImageEncryptCompress
             // 
             this.Label_tap_position.AutoSize = true;
             this.Label_tap_position.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_tap_position.Location = new System.Drawing.Point(456, 93);
+            this.Label_tap_position.Location = new System.Drawing.Point(491, 129);
             this.Label_tap_position.Name = "Label_tap_position";
             this.Label_tap_position.Size = new System.Drawing.Size(168, 24);
             this.Label_tap_position.TabIndex = 21;
@@ -204,7 +165,7 @@ namespace ImageEncryptCompress
             // tap_position
             // 
             this.tap_position.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tap_position.Location = new System.Drawing.Point(623, 94);
+            this.tap_position.Location = new System.Drawing.Point(658, 130);
             this.tap_position.Name = "tap_position";
             this.tap_position.Size = new System.Drawing.Size(155, 24);
             this.tap_position.TabIndex = 22;
@@ -212,7 +173,7 @@ namespace ImageEncryptCompress
             // Decrypt_button
             // 
             this.Decrypt_button.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Decrypt_button.Location = new System.Drawing.Point(623, 140);
+            this.Decrypt_button.Location = new System.Drawing.Point(658, 176);
             this.Decrypt_button.Name = "Decrypt_button";
             this.Decrypt_button.Size = new System.Drawing.Size(94, 37);
             this.Decrypt_button.TabIndex = 23;
@@ -220,12 +181,49 @@ namespace ImageEncryptCompress
             this.Decrypt_button.UseVisualStyleBackColor = true;
             this.Decrypt_button.Click += new System.EventHandler(this.DecryptButton_Click);
             // 
+            // Compressbtn
+            // 
+            this.Compressbtn.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.Compressbtn.Location = new System.Drawing.Point(904, 425);
+            this.Compressbtn.Name = "Compressbtn";
+            this.Compressbtn.Size = new System.Drawing.Size(97, 69);
+            this.Compressbtn.TabIndex = 24;
+            this.Compressbtn.Text = "Compress";
+            this.Compressbtn.UseVisualStyleBackColor = true;
+            this.Compressbtn.Click += new System.EventHandler(this.compressbtn_Click);
+            // 
+            // CompressExistedImage
+            // 
+            this.CompressExistedImage.AutoSize = true;
+            this.CompressExistedImage.Checked = true;
+            this.CompressExistedImage.Location = new System.Drawing.Point(1017, 437);
+            this.CompressExistedImage.Name = "CompressExistedImage";
+            this.CompressExistedImage.Size = new System.Drawing.Size(122, 17);
+            this.CompressExistedImage.TabIndex = 25;
+            this.CompressExistedImage.TabStop = true;
+            this.CompressExistedImage.Text = "Compress this Image";
+            this.CompressExistedImage.UseVisualStyleBackColor = true;
+            // 
+            // Decompressbtn
+            // 
+            this.Decompressbtn.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.Decompressbtn.Location = new System.Drawing.Point(904, 512);
+            this.Decompressbtn.Name = "Decompressbtn";
+            this.Decompressbtn.Size = new System.Drawing.Size(117, 69);
+            this.Decompressbtn.TabIndex = 27;
+            this.Decompressbtn.Text = "Decompress";
+            this.Decompressbtn.UseVisualStyleBackColor = true;
+            this.Decompressbtn.Click += new System.EventHandler(this.Decompressbtn_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1335, 681);
+            this.Controls.Add(this.Decompressbtn);
+            this.Controls.Add(this.CompressExistedImage);
+            this.Controls.Add(this.Compressbtn);
             this.Controls.Add(this.Decrypt_button);
             this.Controls.Add(this.tap_position);
             this.Controls.Add(this.Label_tap_position);
@@ -234,10 +232,6 @@ namespace ImageEncryptCompress
             this.Controls.Add(this.Encrypt_button);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtWidth);
-            this.Controls.Add(this.txtHeight);
             this.Controls.Add(this.compareImagesButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnOpen);
@@ -261,10 +255,6 @@ namespace ImageEncryptCompress
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button compareImagesButton;
-        private System.Windows.Forms.TextBox txtHeight;
-        private System.Windows.Forms.TextBox txtWidth;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button Encrypt_button;
@@ -273,6 +263,9 @@ namespace ImageEncryptCompress
         private System.Windows.Forms.Label Label_tap_position;
         private System.Windows.Forms.TextBox tap_position;
         private System.Windows.Forms.Button Decrypt_button;
+        private System.Windows.Forms.Button Compressbtn;
+        private System.Windows.Forms.RadioButton CompressExistedImage;
+        private System.Windows.Forms.Button Decompressbtn;
     }
 }
 

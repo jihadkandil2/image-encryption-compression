@@ -96,7 +96,7 @@ namespace ImageEncryptCompress
                 }
                 original_bm.UnlockBits(bmd);
             }
-
+            
             return Buffer;
         }
         
