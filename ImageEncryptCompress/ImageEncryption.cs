@@ -121,11 +121,9 @@ namespace ImageEncryptCompress
         /// <param name="Image"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static RGBPixel[,] Encrypt( RGBPixel[,] Image , string initial_seed="" , int tap_position=8)
+        public static RGBPixel[,] Encrypt( RGBPixel[,] Image , string initial_seed , int tap_position)
         {
-            //ImageOperations.ExtractPixelColors("D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\INPUT\\Sample1.bmp");
-            //ImageOperations.ExtractPixelColors("D:\\Collegue\\6th semester\\Algorithm\\Project\\[1] Image Encryption and Compression\\Sample Test\\SampleCases_Encryption\\OUTPUT\\Sample1Output.bmp");
-
+            
             //[1]-
             int height = ImageOperations.GetHeight(Image); //row
             int width = ImageOperations.GetWidth(Image);  //col
@@ -171,41 +169,8 @@ namespace ImageEncryptCompress
                 newBlue[i] = XorElement(BlueArray[i], streamKey);
 
             }
+
            
-          //  seed = Green_seed;
-            for (int i = 0; i < width * height; i++)
-            {
-                
-            }
-        //    seed = Blue_seed;
-            for (int i = 0; i < width * height; i++)
-            {
-               
-            }
-
-            //[2]-
-           /*
-            int key_len = 8; // to allow keystream to be always 8 number
-            string Red_key = LFSR(initial_seed, tap_position , key_len);
-            string Green_key = LFSR(Red_key , tap_position, key_len);
-            string Blue_key = LFSR(Green_key , tap_position ,key_len);
-
-
-            string R_key_stream = Key_stream_generation(Red_key); 
-            string G_key_stream = Key_stream_generation(Green_key);
-            string B_key_stream = Key_stream_generation(Blue_key);
-
-            //[3]-
-
-            byte[] newRed = new byte[width * height];
-            byte[] newBlue = new byte[width * height];
-            byte[] newGreen = new byte[width * height];
-
-            //Encrption using keystream
-            newRed = Xor(RedArray , R_key_stream);
-            newGreen = Xor(GreenArray, G_key_stream);
-            newBlue = Xor(BlueArray, B_key_stream);
-            */
             //[4]-
             RGBPixel[,] Encrypted_Image = new  RGBPixel[height, width];
             int counter = 0; 
