@@ -20,14 +20,37 @@ namespace ImageEncryptCompress
         RGBPixel[,] DecompressedImage;
         private void compressButton_Click(object sender, EventArgs e)
         {
+            //I want to get the folder path to be created not an existing file path
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            string CompressedFilePath;
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                CompressedFilePath = folderBrowserDialog1.SelectedPath + "\\CompressedImage.bin";
+                if (CompressedFilePath == null || CompressedFilePath.Equals(""))
+                {
+                    MessageBox.Show("Please select a folder to create the compressed file at!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Unexpected Error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 //Open the browsed image and display it
                 string OpenedFilePath = openFileDialog1.FileName;
+                if (OpenedFilePath == null || OpenedFilePath.Equals(""))
+                {
+                    MessageBox.Show("Please select an image", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 double sizeBeforeCompressionInKB = (new FileInfo(OpenedFilePath).Length) / (1024.0);
                 OriginalImage = ImageOperations.OpenImage(OpenedFilePath);
-                double sizeAfterCompression = ImageCompression.Compress(OriginalImage);
+                double sizeAfterCompression = ImageCompression.Compress(OriginalImage,CompressedFilePath);
                 ImageOperations.DisplayImage(OriginalImage, pictureBox1);
                 MessageBox.Show("Compressed from (" +  sizeBeforeCompressionInKB +") KB" + " to (" + sizeAfterCompression + ") KB");
             }

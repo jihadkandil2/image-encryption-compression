@@ -22,16 +22,8 @@ namespace ImageEncryptCompress
         static Dictionary<string, byte> DecompressionGreenEncoding = new Dictionary<string, byte>();
         static Dictionary<string, byte> DecompressionBlueEncoding = new Dictionary<string, byte>();
 
-
-        static string CompressedBlue = "";
-        static string CompressedRed = "";
-        static string CompressedGreen = "";
-
         static Node redRoot, greenRoot, blueRoot;
         static int RowSize, ColSize;
-        static string colorDelimiter = "45";
-        static string nodeDelimiter = "35";
-
         internal class Node : IComparable
         {
             public Node left;
@@ -246,10 +238,9 @@ namespace ImageEncryptCompress
             return leaves;
         }
 
-        static double SaveImageIntoFile(RGBPixel[,] Image,int RowSize,int ColSize)
+        static double SaveImageIntoFile(RGBPixel[,] Image, int RowSize, int ColSize, string filePath)
         {
             long totalAfterCompressionInBytes = 0;
-            string filePath = "E:\\Algorithms\\5 Project\\RELEASE\\[1] Image Encryption and Compression\\Startup Code\\[TEMPLATE] ImageEncryptCompress\\compressed.bin";
             using (BinaryWriter binaryWriter = new BinaryWriter(new FileStream(filePath, FileMode.Create), Encoding.UTF8))
             {
                 binaryWriter.Write(RowSize);
@@ -326,11 +317,7 @@ namespace ImageEncryptCompress
 
         static void TransformCompressedFileToImage(BinaryReader binaryReader, Dictionary<string, byte> Encoding, RGBPixel[,] Image,char Color)
         {
-            /*string bits = binaryReader.ReadString();
-            int totalBitsSize = bits.Length;
-            StringBuilder currBits = new StringBuilder();
-            string temp = "";
-            int pixelRow = 0, pixelCol = 0;*/
+            
             int pads = Convert.ToInt32(binaryReader.ReadByte());
             int bytesNumber = binaryReader.ReadInt32();
             byte[] bytes = binaryReader.ReadBytes(bytesNumber);
@@ -390,7 +377,7 @@ namespace ImageEncryptCompress
             return OriginalImage;
 
         }
-        public static double Compress(RGBPixel[,] Image)
+        public static double Compress(RGBPixel[,] Image,string FileToBeCompressedPath)
         {
             CompressionEncodingRed.Clear();
             CompressionEncodingBlue.Clear();
@@ -399,7 +386,7 @@ namespace ImageEncryptCompress
             HuffmanEncode(Image);
             int RowSize = Image.GetLength(0);
             int ColSize = Image.GetLength(1);
-            return SaveImageIntoFile(Image,RowSize,ColSize);
+            return SaveImageIntoFile(Image,RowSize,ColSize,FileToBeCompressedPath);
 
         }
         public static RGBPixel[,] Decompress(string compressedFilePath)
