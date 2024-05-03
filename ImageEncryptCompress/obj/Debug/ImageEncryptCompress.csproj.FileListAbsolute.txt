@@ -29,6 +29,7 @@ E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Cod
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
 E:\Algorithms\5 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
+<<<<<<< HEAD
 D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe.config
 D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe
 D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.pdb
@@ -39,3 +40,15 @@ D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\
 D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
 D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
 D:\Collegue\6th semester\Algorithm\Project\Proj\image-encryption-compression v1\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
+=======
+E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe.config
+E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.exe
+E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\bin\Debug\ImageEncryptCompress.pdb
+E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.AssemblyReference.cache
+E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.MainForm.resources
+E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.Properties.Resources.resources
+E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.GenerateResource.cache
+E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.csproj.CoreCompileInputs.cache
+E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.exe
+E:\Projects\Algorithms\image-encryption-compression\ImageEncryptCompress\obj\Debug\ImageEncryptCompress.pdb
+>>>>>>> 251d96b3c46e864304f44fb1ec6f011a5890ae3d

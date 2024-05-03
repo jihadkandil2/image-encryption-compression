@@ -68,8 +68,12 @@ namespace ImageEncryptCompress
         /// <param name="Image"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static RGBPixel[,] Encrypt( RGBPixel[,] Image , string initial_seed="" , int tap_position=8)
+        public static RGBPixel[,] Encrypt( RGBPixel[,] Image , string initial_seed , int tap_position)
         {
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 251d96b3c46e864304f44fb1ec6f011a5890ae3d
             //[1]-
             int height = ImageOperations.GetHeight(Image); //row
             int width = ImageOperations.GetWidth(Image);  //col
@@ -115,6 +119,10 @@ namespace ImageEncryptCompress
 
             }
 
+<<<<<<< HEAD
+=======
+           
+>>>>>>> 251d96b3c46e864304f44fb1ec6f011a5890ae3d
             //[4]-
             RGBPixel[,] Encrypted_Image = new  RGBPixel[height, width];
             int counter = 0; 
