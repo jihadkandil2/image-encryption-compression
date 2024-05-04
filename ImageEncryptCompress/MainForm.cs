@@ -52,11 +52,11 @@ namespace ImageEncryptCompress
             string userInput_initial_seed = initial_seed.Text;
             string userInput_tap_position = tap_position.Text;
 
-            if(userInput_initial_seed.Length < 8)
+            /*if(userInput_initial_seed.Length < 8)
             {
                 MessageBox.Show("Initial seed must be at least 8 bits", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
+            }*/
 
             
             if (userInput_initial_seed == "" || userInput_tap_position == "" || userInput_initial_seed == null || userInput_tap_position == null)

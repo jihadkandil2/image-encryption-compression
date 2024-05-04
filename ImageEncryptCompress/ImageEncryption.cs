@@ -152,7 +152,17 @@ namespace ImageEncryptCompress
             byte[] newRed = new byte[width * height];
             byte[] newBlue = new byte[width * height];
             byte[] newGreen = new byte[width * height];
-      
+
+            
+            for(int i = 0; i < seed.Length; i++)
+            {
+                if (seed[i] != '0' && seed[i] != '1')
+                {
+                    string BinaryString = Convert.ToString(seed[i], 2).PadLeft(8, '0');
+                    seed = seed.Remove(i, 1);
+                    seed = seed.Insert(i, BinaryString);
+                }
+            }
             
             for (int i =0; i< width * height;i++)
             {
