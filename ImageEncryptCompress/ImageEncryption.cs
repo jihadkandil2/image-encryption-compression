@@ -19,29 +19,31 @@ namespace ImageEncryptCompress
             string shifted = s.Substring(1);
             return shifted;
         }                                              // 8-6+1 = 1
-        public static string LFSR(string initialSeed , int tapPosition , int k )
+        public static string LFSR(string initialSeed , int tapPosition , int k)
         {
+            //StringBuilder for in-place representation of a string to avoid creating a new string every time
+            StringBuilder initialSeedBuilder = new StringBuilder(initialSeed);
             int len = initialSeed.Length;
             for (int i = 0; i < k; i++) // 1101010111     10 -(6+1) = 3
             {
-                int deleted_left = int.Parse(initialSeed[0].ToString());
+                int deleted_left = initialSeedBuilder[0]-'0';//always zero/one even after changing to alphanumeric  --> O(1)
 
-                int index_tap_position = len - (tapPosition + 1);
-                int element_at_tap_postion = int.Parse(initialSeed[index_tap_position].ToString());
+                int index_tap_position = len - (tapPosition + 1); //O(1)
+                int element_at_tap_postion = initialSeedBuilder[index_tap_position] - '0';//O(1)
 
-                string shifted_string = ShiftLeft(initialSeed); //remove left element
+                initialSeedBuilder.Remove(0, 1);//O(L)
 
-                int result_of_xor = deleted_left ^ element_at_tap_postion;
+                int result_of_xor = deleted_left ^ element_at_tap_postion; // ??? O(1)
 
-                string concatenated_right_bit = result_of_xor.ToString();
-                initialSeed = string.Concat(shifted_string, concatenated_right_bit);
+                char concatenated_right_bit = (char)(result_of_xor + '0');//O(1)
+                initialSeedBuilder.Append(concatenated_right_bit); //O(L) 
             }
-            return initialSeed;
+            return initialSeedBuilder.ToString();
         }
         public static string Key_stream_generation(string resulted_seed)
         {
             //we have to handle if the lenght <= 8 but in test cases the following scenario is not happening
-
+            
             int index_to_start_ur_key_stream = resulted_seed.Length - 8;
             string key_stream = resulted_seed.Substring(index_to_start_ur_key_stream);
             return key_stream;
@@ -83,7 +85,7 @@ namespace ImageEncryptCompress
         }
 
         //should be deleted
-        public static byte[] Xor(byte[] Color_Array , string Color_key)
+        /*public static byte[] Xor(byte[] Color_Array , string Color_key)
         {
             int len = Color_Array.Length;
             byte[] Encrypted_color = new byte[len];
@@ -96,7 +98,7 @@ namespace ImageEncryptCompress
                 Encrypted_color[i]= (byte)result;
             }
             return Encrypted_color;
-        }
+        }*/
         public static byte XorElement(byte Color_Array, string Color_key)
         {
             int decimalNumberOfKey = Convert.ToInt32(Color_key, 2);
@@ -124,36 +126,15 @@ namespace ImageEncryptCompress
         public static RGBPixel[,] Encrypt( RGBPixel[,] Image , string initial_seed , int tap_position)
         {
             
-            //[1]-
+            //O(1) + O(1)
             int height = ImageOperations.GetHeight(Image); //row
             int width = ImageOperations.GetWidth(Image);  //col
-            byte[] BlueArray = new byte[width *height];
-            byte[] RedArray = new byte[width * height];
-            byte[] GreenArray = new byte[width * height];
 
-            int count = 0;
-   
-            for (int y = 0; y < height ; y++)  //row
-            {
-                for (int x = 0; x < width; x++)//col
-                {
-                    // Access the pixel at position (x, y)
-                    BlueArray[count] = Image[y, x].blue;
-                    RedArray[count] = Image[y, x].red;
-                    GreenArray[count] = Image[y, x].green;
-                    count++;
-                }
-            }
-
-            // for each color pixel will generate new key stream [this is the problem]
-            
+            //O(L)
             string seed = initial_seed;
             string streamKey = "";
-            byte[] newRed = new byte[width * height];
-            byte[] newBlue = new byte[width * height];
-            byte[] newGreen = new byte[width * height];
 
-            
+            //O(L ^ 2)
             for(int i = 0; i < seed.Length; i++)
             {
                 if (seed[i] != '0' && seed[i] != '1')
@@ -163,40 +144,30 @@ namespace ImageEncryptCompress
                     seed = seed.Insert(i, BinaryString);
                 }
             }
-            
-            for (int i =0; i< width * height;i++)
+
+            //O(H*W)
+            RGBPixel[,] Encrypted_Image = new RGBPixel[height, width];
+
+            //O(H*W*L)
+            for (int y =0; y < height;y++)
             {
-                seed = LFSR(seed, tap_position, 8);
-                streamKey = Key_stream_generation(seed);
-                newRed[i] = XorElement(RedArray[i], streamKey);
-
-                seed = LFSR(seed, tap_position, 8);
-                streamKey = Key_stream_generation(seed);
-                newGreen[i] = XorElement(GreenArray[i], streamKey);
-
-                seed = LFSR(seed, tap_position, 8);
-                streamKey = Key_stream_generation(seed);
-                newBlue[i] = XorElement(BlueArray[i], streamKey);
-
-            }
-
-           
-            //[4]-
-            RGBPixel[,] Encrypted_Image = new  RGBPixel[height, width];
-            int counter = 0; 
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
+                for(int x = 0; x < width; x++)
                 {
-                    // Access the pixel at position (x, y)
-                    Encrypted_Image[y, x].red = newRed[counter];
-                    Encrypted_Image[y, x].green = newGreen[counter];
-                    Encrypted_Image[y, x].blue = newBlue[counter];
-                    
-                    counter++;
-                   
+                    seed = LFSR(seed, tap_position, 8);
+                    streamKey = Key_stream_generation(seed);
+                    Encrypted_Image[y, x].red = XorElement(Image[y, x].red, streamKey);
+
+                    seed = LFSR(seed, tap_position, 8);
+                    streamKey = Key_stream_generation(seed);
+                    Encrypted_Image[y, x].green = XorElement(Image[y, x].green, streamKey);
+
+                    seed = LFSR(seed, tap_position, 8);
+                    streamKey = Key_stream_generation(seed);
+                    Encrypted_Image[y, x].blue = XorElement(Image[y,x].blue, streamKey);
                 }
+                
             }
+
 
             return Encrypted_Image;
         }
