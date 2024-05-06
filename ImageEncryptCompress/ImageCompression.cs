@@ -153,20 +153,22 @@ namespace ImageEncryptCompress
             }
         }
 
-        private static Node BuildTree(RGBPixel[,] Image, Dictionary<byte, string> CompressedEncoding, Dictionary<byte, int> ColorFequency)
+        private static Node BuildTree(Dictionary<byte, int> ColorFequency)
         {
             PriorityQueue<Node> priorityQueue = new PriorityQueue<Node>();
+            Node node;
             foreach (KeyValuePair<byte, int> item in ColorFequency)
             {
-                Node node = new Node(item.Key, item.Value);
+                node = new Node(item.Key, item.Value);
                 priorityQueue.Enqueue(node);
             }
+            Node minim, secondMinim,parent;
             while (priorityQueue.Count > 1)
             {
-                Node minim = priorityQueue.Dequeue();
-                Node secondMinim = priorityQueue.Dequeue();
+                minim = priorityQueue.Dequeue();
+                secondMinim = priorityQueue.Dequeue();
 
-                Node parent = new Node(-1, minim.frequency + secondMinim.frequency);
+                parent = new Node(-1, minim.frequency + secondMinim.frequency);
                 parent.right = minim;
                 parent.left = secondMinim;
 
@@ -177,11 +179,11 @@ namespace ImageEncryptCompress
             return priorityQueue.Dequeue();
         }
 
-        private static void HuffmanEncode(RGBPixel[,] Image)
+        private static void HuffmanEncode()
         {
-            redRoot = BuildTree(Image, CompressionEncodingRed, RedFrequency);
-            greenRoot = BuildTree(Image, CompressionEncodingGreen, GreenFrequency);
-            blueRoot = BuildTree(Image, CompressionEncodingBlue, BlueFrequency);
+            redRoot = BuildTree(RedFrequency);
+            greenRoot = BuildTree(GreenFrequency);
+            blueRoot = BuildTree(BlueFrequency);
         }
 
         private static string ReplaceBinaryCode(RGBPixel[,] Image, Dictionary<byte, string> Encoding, Func<RGBPixel, byte> colorSelector)
@@ -258,13 +260,17 @@ namespace ImageEncryptCompress
                 binaryWriter.Write(ColSize);
                 int NumOfRedLeaves = GetNumberOfLeaves(redRoot);
                 binaryWriter.Write(NumOfRedLeaves);
-                SaveTreeIntoFile(binaryWriter, redRoot, CompressionEncodingRed, new StringBuilder());
+                StringBuilder currCode = new StringBuilder();
+                SaveTreeIntoFile(binaryWriter, redRoot, CompressionEncodingRed, currCode);
+                currCode.Clear();
                 int NumOfGreenLeaves = GetNumberOfLeaves(greenRoot);
                 binaryWriter.Write(NumOfGreenLeaves);
-                SaveTreeIntoFile(binaryWriter, greenRoot, CompressionEncodingGreen, new StringBuilder());
+                SaveTreeIntoFile(binaryWriter, greenRoot, CompressionEncodingGreen, currCode);
+                currCode.Clear();
                 int NumOfBlueLeaves = GetNumberOfLeaves(blueRoot);
                 binaryWriter.Write(NumOfBlueLeaves);
-                SaveTreeIntoFile(binaryWriter, blueRoot, CompressionEncodingBlue, new StringBuilder());
+                currCode.Clear();
+                SaveTreeIntoFile(binaryWriter, blueRoot, CompressionEncodingBlue, currCode);
 
                 string RedBits = GetImageComponentBytes(Image, 'r');
                 List<byte> RcurrCodeBytes = new List<byte>();
@@ -394,7 +400,7 @@ namespace ImageEncryptCompress
             CompressionEncodingBlue.Clear();
             CompressionEncodingGreen.Clear();
             CalcFrequency(Image);
-            HuffmanEncode(Image);
+            HuffmanEncode();
             int RowSize = Image.GetLength(0);
             int ColSize = Image.GetLength(1);
             return SaveImageIntoFile(Image, RowSize, ColSize, FileToBeCompressedPath,initialSeed,tapPosition);
