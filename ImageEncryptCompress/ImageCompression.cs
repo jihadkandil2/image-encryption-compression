@@ -94,27 +94,33 @@ namespace ImageEncryptCompress
             }
         }
 
-        private static void SaveTreeIntoFile(BinaryWriter binaryWriter, Node root, Dictionary<byte, string> CompressionEncoding, string currCode)
+        private static void SaveTreeIntoFile(BinaryWriter binaryWriter, Node root, Dictionary<byte, string> CompressionEncoding, StringBuilder currCode)
         {
             if (root == null)
                 return;
-            SaveTreeIntoFile(binaryWriter, root.left, CompressionEncoding, currCode + '0');
-            SaveTreeIntoFile(binaryWriter, root.right, CompressionEncoding, currCode + '1');
+            currCode.Append('0');
+            int currIndex = currCode.Length-1;
+            SaveTreeIntoFile(binaryWriter, root.left, CompressionEncoding, currCode);
+            currCode.Remove(currIndex,currCode.Length - currIndex);
+            currCode.Append('1');
+            currIndex = currCode.Length - 1;
+            SaveTreeIntoFile(binaryWriter, root.right, CompressionEncoding, currCode);
+            currCode.Remove(currIndex, currCode.Length - currIndex);
             if (root.left == null && root.right == null)
             {
 
                 List<byte> currCodeBytes = new List<byte>();
-                string toBeAddedCode = currCode;
+                string toBeAddedCode = currCode.ToString();
                 int pads = 8 - currCode.Length % 8;
                 if (pads != 8)
                 {
                     StringBuilder temp = new StringBuilder();
                     temp.Append('0', pads);
-                    currCode += temp.ToString();
+                    currCode.Append(temp);
                 }
                 for (int i = 0; i < currCode.Length / 8; i++)
                 {
-                    currCodeBytes.Add(Convert.ToByte(currCode.Substring(i * 8, 8), 2));
+                    currCodeBytes.Add(Convert.ToByte(currCode.ToString().Substring(i * 8, 8), 2));
                 }
                 binaryWriter.Write((byte)pads);
                 binaryWriter.Write((byte)currCodeBytes.Count);//to be optimized
@@ -252,13 +258,13 @@ namespace ImageEncryptCompress
                 binaryWriter.Write(ColSize);
                 int NumOfRedLeaves = GetNumberOfLeaves(redRoot);
                 binaryWriter.Write(NumOfRedLeaves);
-                SaveTreeIntoFile(binaryWriter, redRoot, CompressionEncodingRed, "");
+                SaveTreeIntoFile(binaryWriter, redRoot, CompressionEncodingRed, new StringBuilder());
                 int NumOfGreenLeaves = GetNumberOfLeaves(greenRoot);
                 binaryWriter.Write(NumOfGreenLeaves);
-                SaveTreeIntoFile(binaryWriter, greenRoot, CompressionEncodingGreen, "");
+                SaveTreeIntoFile(binaryWriter, greenRoot, CompressionEncodingGreen, new StringBuilder());
                 int NumOfBlueLeaves = GetNumberOfLeaves(blueRoot);
                 binaryWriter.Write(NumOfBlueLeaves);
-                SaveTreeIntoFile(binaryWriter, blueRoot, CompressionEncodingBlue, "");
+                SaveTreeIntoFile(binaryWriter, blueRoot, CompressionEncodingBlue, new StringBuilder());
 
                 string RedBits = GetImageComponentBytes(Image, 'r');
                 List<byte> RcurrCodeBytes = new List<byte>();
