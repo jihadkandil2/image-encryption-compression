@@ -133,12 +133,12 @@ namespace ImageEncryptCompress
         private static void BuildEncodingFromTree(BinaryReader binaryReader, Dictionary<string, byte> DecompressionEncoding)
         {
             int leavesNumber = binaryReader.ReadInt32();
+            StringBuilder str = new StringBuilder();
             for (int i = 0; i < leavesNumber; i++)
             {
                 int pads = Convert.ToInt32(binaryReader.ReadByte());
                 int bytesNumber = Convert.ToInt32(binaryReader.ReadByte());
                 byte[] bytes = binaryReader.ReadBytes(bytesNumber);
-                StringBuilder str = new StringBuilder();
                 foreach (byte b in bytes)
                 {
                     str.Append(Convert.ToString(b, 2).PadLeft(8, '0'));
@@ -149,7 +149,7 @@ namespace ImageEncryptCompress
                     DecompressionEncoding.Add(code.Substring(0, code.Length - pads), symbol);
                 else
                     DecompressionEncoding.Add(code, symbol);
-
+                str.Clear();
             }
         }
 

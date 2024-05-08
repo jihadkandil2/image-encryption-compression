@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -23,6 +24,10 @@ namespace ImageEncryptCompress
 
         static string initialSeed = "";
         static int tapPosition = 0;
+        static long forwardTime = 0;
+        static long backwardTime = 0;
+        static Stopwatch stopwatch = new Stopwatch();
+
 
         private void OpenImageButton_Click(object sender, EventArgs e)
         {
@@ -31,7 +36,7 @@ namespace ImageEncryptCompress
             {
                 //Open the browsed image and display it
                 string OpenedFilePath = openFileDialog1.FileName;
-                if(OpenedFilePath == null || OpenedFilePath.Equals(""))
+                if (OpenedFilePath == null || OpenedFilePath.Equals(""))
                 {
                     MessageBox.Show("Please select an image", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -58,7 +63,7 @@ namespace ImageEncryptCompress
                 return;
             }*/
 
-            
+
             if (userInput_initial_seed == "" || userInput_tap_position == "" || userInput_initial_seed == null || userInput_tap_position == null)
             {
                 MessageBox.Show("Please enter the initial seed and tap position", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -73,17 +78,19 @@ namespace ImageEncryptCompress
 
             initialSeed = userInput_initial_seed;
             tapPosition = parsedTapPosition;
-
-            EncryptedImage = ImageEncryption.Encrypt(OriginalImage , userInput_initial_seed, parsedTapPosition);
-
+            stopwatch.Start();
+            EncryptedImage = ImageEncryption.Encrypt(OriginalImage, userInput_initial_seed, parsedTapPosition);
+            stopwatch.Stop();
+            forwardTime += stopwatch.ElapsedMilliseconds;
             ImageOperations.DisplayImage(EncryptedImage, pictureBox2);
-           
+            MessageBox.Show("ENCRYPTION DONE after " + forwardTime + " ms");
+
         }
 
         private void DecryptButton_Click(object sender, EventArgs e)
         {
 
-            if(EncryptedImage == null)
+            if (EncryptedImage == null)
             {
                 MessageBox.Show("Please encrypt the image first", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -111,16 +118,19 @@ namespace ImageEncryptCompress
                 return;
             }
 */
+            stopwatch.Start();
             DecryptedImage = ImageEncryption.Decrypt(EncryptedImage, initialSeed, tapPosition);
-
+            stopwatch.Stop();
+            backwardTime += stopwatch.ElapsedMilliseconds;
             ImageOperations.DisplayImage(DecryptedImage, pictureBox2);
-
+            MessageBox.Show("DECRYPTION DONE after " + stopwatch.ElapsedMilliseconds + " ms");
+            MessageBox.Show("BACKWARD TIME TOTAL : " + backwardTime);
 
         }
         private void compressbtn_Click(object sender, EventArgs e)
         {
-            double sizeBeforCompressionKB = 0.0;
-            double sizeAfterCompressionKB = 0.0;
+            double sizeBeforCompressionBytes = 0.0;
+            double sizeAfterCompressionBytes = 0.0;
             if (CompressExistedImage.Checked)
             {
                 if (EncryptedImage == null)
@@ -144,8 +154,15 @@ namespace ImageEncryptCompress
                     MessageBox.Show("Unexpected Error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                sizeBeforCompressionKB = ((double)ImageOperations.GetHeight(EncryptedImage) * (double)ImageOperations.GetWidth(EncryptedImage) * 24.0 ) / (8.0 * 1024.0);
-                sizeAfterCompressionKB = ImageCompression.Compress(EncryptedImage, CompressedFilePath,initialSeed,tapPosition);
+                sizeBeforCompressionBytes = ((double)ImageOperations.GetHeight(EncryptedImage) * (double)ImageOperations.GetWidth(EncryptedImage) * 24.0) / (8.0);
+                stopwatch.Start();
+                sizeAfterCompressionBytes = 1024.0 * ImageCompression.Compress(EncryptedImage, CompressedFilePath, initialSeed, tapPosition);
+                stopwatch.Stop();
+                forwardTime += stopwatch.ElapsedMilliseconds;
+                MessageBox.Show("BINARY FILE FROM " + sizeBeforCompressionBytes + " bytes to : " + sizeAfterCompressionBytes + " bytes");
+                MessageBox.Show("COMPRESSION TIME : " + stopwatch.ElapsedMilliseconds.ToString());
+                MessageBox.Show("ELAPSED TIME AFTER FORWARD TOTAL IS : " + forwardTime);
+                forwardTime = 0;
             }
             /*else if(DeviceImageCompress.Checked)
             {
@@ -205,7 +222,6 @@ namespace ImageEncryptCompress
                     ImageOperations.DisplayImage(OriginalImage, pictureBox2);
                 }
             }*/
-            MessageBox.Show("Compressed from (" + sizeBeforCompressionKB + ") KB" + " to (" + sizeAfterCompressionKB + ") KB");
         }
 
         private void Decompressbtn_Click(object sender, EventArgs e)
@@ -213,17 +229,20 @@ namespace ImageEncryptCompress
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                
+
                 //Open the browsed image and display it
                 string OpenedFilePath = openFileDialog1.FileName;
-                EncryptedImage = ImageCompression.Decompress(OpenedFilePath,out string outInitialSeed,out int outTapPosition);
+                stopwatch.Start();
+                EncryptedImage = ImageCompression.Decompress(OpenedFilePath, out string outInitialSeed, out int outTapPosition);
+                stopwatch.Stop();
+                backwardTime += stopwatch.ElapsedMilliseconds;
                 initialSeed = outInitialSeed;
                 tapPosition = outTapPosition;
                 ImageOperations.DisplayImage(EncryptedImage, pictureBox2);
                 MessageBox.Show("Decompression Done! , Image In PictureBox Is The Decompressed Image");
-
+                MessageBox.Show("DECOMPRESSION TIME : " + stopwatch.ElapsedMilliseconds.ToString());
+                backwardTime = 0;
             }
-
         }
 
         private void CompareImagesButton_Click(object sender, EventArgs e)
