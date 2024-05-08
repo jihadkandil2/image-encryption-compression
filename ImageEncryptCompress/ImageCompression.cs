@@ -169,8 +169,8 @@ namespace ImageEncryptCompress
                 secondMinim = priorityQueue.Dequeue();
 
                 parent = new Node(-1, minim.frequency + secondMinim.frequency);
-                parent.left = minim;
-                parent.right = secondMinim;
+                parent.right = minim;
+                parent.left = secondMinim;
 
                 priorityQueue.Enqueue(parent);
 
