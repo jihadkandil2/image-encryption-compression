@@ -26,7 +26,6 @@ namespace ImageEncryptCompress
         static int tapPosition = 0;
         static long forwardTime = 0;
         static long backwardTime = 0;
-        static Stopwatch stopwatch = new Stopwatch();
 
 
         private void OpenImageButton_Click(object sender, EventArgs e)
@@ -48,6 +47,8 @@ namespace ImageEncryptCompress
 
         private void EncryptButton_Click(object sender, EventArgs e)
         {
+            Stopwatch stopwatch = new Stopwatch();
+
             if (OriginalImage == null)
             {
                 MessageBox.Show("Please open an image first", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -89,6 +90,7 @@ namespace ImageEncryptCompress
 
         private void DecryptButton_Click(object sender, EventArgs e)
         {
+            Stopwatch stopwatch = new Stopwatch();
 
             if (EncryptedImage == null)
             {
@@ -125,10 +127,13 @@ namespace ImageEncryptCompress
             ImageOperations.DisplayImage(DecryptedImage, pictureBox2);
             MessageBox.Show("DECRYPTION DONE after " + stopwatch.ElapsedMilliseconds + " ms");
             MessageBox.Show("BACKWARD TIME TOTAL : " + backwardTime);
+            backwardTime = 0;
 
         }
         private void compressbtn_Click(object sender, EventArgs e)
         {
+            Stopwatch stopwatch = new Stopwatch();
+
             double sizeBeforCompressionBytes = 0.0;
             double sizeAfterCompressionBytes = 0.0;
             if (CompressExistedImage.Checked)
@@ -226,6 +231,8 @@ namespace ImageEncryptCompress
 
         private void Decompressbtn_Click(object sender, EventArgs e)
         {
+            Stopwatch stopwatch = new Stopwatch();
+
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -241,7 +248,6 @@ namespace ImageEncryptCompress
                 ImageOperations.DisplayImage(EncryptedImage, pictureBox2);
                 MessageBox.Show("Decompression Done! , Image In PictureBox Is The Decompressed Image");
                 MessageBox.Show("DECOMPRESSION TIME : " + stopwatch.ElapsedMilliseconds.ToString());
-                backwardTime = 0;
             }
         }
 
