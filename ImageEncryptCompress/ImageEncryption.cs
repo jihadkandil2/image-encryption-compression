@@ -19,11 +19,12 @@ namespace ImageEncryptCompress
             string shifted = s.Substring(1);
             return shifted;
         }                                              // 8-6+1 = 1
-        public static string LFSR(string initialSeed , int tapPosition , int k)
+        public static string LFSR(string initialSeed , int tapPosition , int k, out byte password)
         {
             //StringBuilder for in-place representation of a string to avoid creating a new string every time
             StringBuilder initialSeedBuilder = new StringBuilder(initialSeed);
-            int len = initialSeed.Length;
+            StringBuilder outputPassword = new StringBuilder();
+            int len = initialSeed.Length; 
             for (int i = 0; i < k; i++) // 1101010111     10 -(6+1) = 3
             {
                 int deleted_left = initialSeedBuilder[0]-'0';//always zero/one even after changing to alphanumeric  --> O(1)
@@ -34,10 +35,11 @@ namespace ImageEncryptCompress
                 initialSeedBuilder.Remove(0, 1);//O(L)
 
                 int result_of_xor = deleted_left ^ element_at_tap_postion; // ??? O(1)
-
                 char concatenated_right_bit = (char)(result_of_xor + '0');//O(1)
+                outputPassword.Append(concatenated_right_bit); //O(L)
                 initialSeedBuilder.Append(concatenated_right_bit); //O(L) 
             }
+            password = Convert.ToByte(outputPassword.ToString(),2);
             return initialSeedBuilder.ToString();
         }
         public static string Key_stream_generation(string resulted_seed)
@@ -99,10 +101,9 @@ namespace ImageEncryptCompress
             }
             return Encrypted_color;
         }*/
-        public static byte XorElement(byte Color_Array, string Color_key)
+        public static byte XorElement(byte Color_Array, byte Password)
         {
-            int decimalNumberOfKey = Convert.ToInt32(Color_key, 2);
-            byte result = (byte) (Color_Array ^ decimalNumberOfKey);
+            byte result = (byte) (Color_Array ^ Password);
             return result;
         }
 
@@ -147,23 +148,20 @@ namespace ImageEncryptCompress
 
             //O(H*W)
             RGBPixel[,] Encrypted_Image = new RGBPixel[height, width];
-
             //O(H*W*L)
+            byte password;
             for (int y =0; y < height;y++)
             {
                 for(int x = 0; x < width; x++)
                 {
-                    seed = LFSR(seed, tap_position, 8);
-                    streamKey = Key_stream_generation(seed);
-                    Encrypted_Image[y, x].red = XorElement(Image[y, x].red, streamKey);
+                    seed = LFSR(seed, tap_position, 8,out password);
+                    Encrypted_Image[y, x].red = (byte)(Image[y, x].red ^ password);
 
-                    seed = LFSR(seed, tap_position, 8);
-                    streamKey = Key_stream_generation(seed);
-                    Encrypted_Image[y, x].green = XorElement(Image[y, x].green, streamKey);
+                    seed = LFSR(seed, tap_position, 8, out password);
+                    Encrypted_Image[y, x].green = (byte)(Image[y,x].green ^ password);
 
-                    seed = LFSR(seed, tap_position, 8);
-                    streamKey = Key_stream_generation(seed);
-                    Encrypted_Image[y, x].blue = XorElement(Image[y,x].blue, streamKey);
+                    seed = LFSR(seed, tap_position, 8,out password);
+                    Encrypted_Image[y, x].blue = (byte)(Image[y, x].blue ^ password);
                 }
                 
             }
