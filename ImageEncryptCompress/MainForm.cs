@@ -180,6 +180,32 @@ namespace ImageEncryptCompress
             }
         }
 
+        private void breakEncryptionButton_Click(object sender, EventArgs e)
+        {
+            int num;
+            try
+            {
+                num = int.Parse(breakNTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a valid number", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (EncryptedImage == null)
+            {
+                MessageBox.Show("Please encrypt the image first", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            KeyValuePair<string ,int> result = ImageEncryption.BreakEncryption(EncryptedImage,OriginalImage, num);
+            stopwatch.Stop();
+            MessageBox.Show("Initial Seed : " + result.Key + " , Tap Position : " + result.Value);
+            MessageBox.Show("BREAKING ENCRYPTION DONE after " + stopwatch.ElapsedMilliseconds + " ms");
+
+        }
+
         private void SaveImage(PictureBox pictureBox)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();

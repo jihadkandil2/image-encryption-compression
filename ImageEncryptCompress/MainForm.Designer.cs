@@ -44,6 +44,10 @@ namespace ImageEncryptCompress
             this.Compressbtn = new System.Windows.Forms.Button();
             this.CompressExistedImage = new System.Windows.Forms.RadioButton();
             this.Decompressbtn = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.breakNTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.breakEncryptionButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -215,12 +219,54 @@ namespace ImageEncryptCompress
             this.Decompressbtn.UseVisualStyleBackColor = true;
             this.Decompressbtn.Click += new System.EventHandler(this.Decompressbtn_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(510, 529);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(84, 25);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Enter N";
+            // 
+            // breakNTextBox
+            // 
+            this.breakNTextBox.Location = new System.Drawing.Point(600, 531);
+            this.breakNTextBox.Name = "breakNTextBox";
+            this.breakNTextBox.Size = new System.Drawing.Size(103, 20);
+            this.breakNTextBox.TabIndex = 29;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(466, 442);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(373, 31);
+            this.label3.TabIndex = 30;
+            this.label3.Text = "Breaking the encrypted image";
+            // 
+            // breakEncryptionButton
+            // 
+            this.breakEncryptionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.breakEncryptionButton.Location = new System.Drawing.Point(708, 524);
+            this.breakEncryptionButton.Name = "breakEncryptionButton";
+            this.breakEncryptionButton.Size = new System.Drawing.Size(105, 30);
+            this.breakEncryptionButton.TabIndex = 31;
+            this.breakEncryptionButton.Text = "Break Image";
+            this.breakEncryptionButton.UseVisualStyleBackColor = true;
+            this.breakEncryptionButton.Click += new System.EventHandler(this.breakEncryptionButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1335, 681);
+            this.Controls.Add(this.breakEncryptionButton);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.breakNTextBox);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.Decompressbtn);
             this.Controls.Add(this.CompressExistedImage);
             this.Controls.Add(this.Compressbtn);
@@ -266,6 +312,10 @@ namespace ImageEncryptCompress
         private System.Windows.Forms.Button Compressbtn;
         private System.Windows.Forms.RadioButton CompressExistedImage;
         private System.Windows.Forms.Button Decompressbtn;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox breakNTextBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button breakEncryptionButton;
     }
 }
 

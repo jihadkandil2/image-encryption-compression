@@ -34,14 +34,14 @@ namespace ImageEncryptCompress
 
                 initialSeedBuilder.Remove(0, 1);//O(L)
 
-                int result_of_xor = deleted_left ^ element_at_tap_postion; // ??? O(1)
+                int result_of_xor = deleted_left ^ element_at_tap_postion; // O(1)
 
                 char concatenated_right_bit = (char)(result_of_xor + '0');//O(1)
-                initialSeedBuilder.Append(concatenated_right_bit); //O(L) 
+                initialSeedBuilder.Append(concatenated_right_bit); //O(1) 
                 bits.Append(concatenated_right_bit); //O(1)
             }
-            password = Convert.ToByte(bits.ToString(), 2);
-            return initialSeedBuilder.ToString();
+            password = Convert.ToByte(bits.ToString(), 2);//always 8 characters so O(1)
+            return initialSeedBuilder.ToString();//always 8 characters so O(1)
         }
         public static string Key_stream_generation(string resulted_seed)
         {
@@ -126,28 +126,31 @@ namespace ImageEncryptCompress
         /// <param name="Image"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
+
+        //H : Height of the Image .. W : Width of the Image .. L : Length of the seed
+
+        //Total time complexity : O(H*W*L) ---> O(H*W) we can neglect L as its value is very small compared to H*W
         public static RGBPixel[,] Encrypt(RGBPixel[,] Image, string initial_seed, int tap_position)
-        {
+        { 
 
-            //O(1) + O(1)
-            int height = ImageOperations.GetHeight(Image); //row
-            int width = ImageOperations.GetWidth(Image);  //col
+            int height = ImageOperations.GetHeight(Image); //O(1)
+            int width = ImageOperations.GetWidth(Image);  //O(1)
 
-            //O(L)
-            string seed = initial_seed;
-            string streamKey = "";
+            string seed = initial_seed;//O(L)
 
-            //O(L ^ 2)
+            StringBuilder seedBuilder = new StringBuilder();
+            //O(L) 
             for (int i = 0; i < seed.Length; i++)
             {
                 if (seed[i] != '0' && seed[i] != '1')
                 {
                     string BinaryString = Convert.ToString(seed[i], 2).PadLeft(8, '0');
-                    seed = seed.Remove(i, 1);
-                    seed = seed.Insert(i, BinaryString);
+                    seedBuilder.Append(BinaryString);//O(1) --> 8 characters always
                 }
+                else
+                    seedBuilder.Append(seed[i]);//O(1)
             }
-
+            seed = seedBuilder.ToString();//O(L)
             //O(H*W)
             RGBPixel[,] Encrypted_Image = new RGBPixel[height, width];
 
@@ -157,25 +160,72 @@ namespace ImageEncryptCompress
             {
                 for (int x = 0; x < width; x++)
                 {
-                    seed = LFSR(seed, tap_position, 8, out password);
-                    Encrypted_Image[y, x].red = (byte)(Image[y, x].red ^ password);
+                    seed = LFSR(seed, tap_position, 8, out password);//O(L)
+                    Encrypted_Image[y, x].red = (byte)(Image[y, x].red ^ password);//O(1)
 
-                    seed = LFSR(seed, tap_position, 8, out password);
-                    Encrypted_Image[y, x].green = (byte)(Image[y, x].green ^ password);
+                    seed = LFSR(seed, tap_position, 8, out password);//O(L)
+                    Encrypted_Image[y, x].green = (byte)(Image[y, x].green ^ password);//O(1)
 
-                    seed = LFSR(seed, tap_position, 8, out password);
-                    Encrypted_Image[y, x].blue = (byte)(Image[y, x].blue ^ password);
+                    seed = LFSR(seed, tap_position, 8, out password);//(O(L))
+                    Encrypted_Image[y, x].blue = (byte)(Image[y, x].blue ^ password);//O(1)
                 }
             }
 
 
             return Encrypted_Image;
         }
+
+        //Total time complexity : O(H*W*L) ---> O(H*W) we can neglect L as its value is very small compared to H*W
         public static RGBPixel[,] Decrypt(RGBPixel[,] Image, string initialSeed, int tapPosition)
         {
 
             return Encrypt(Image, initialSeed, tapPosition);
 
+        }
+
+        public static KeyValuePair<string,int> BreakEncryption(RGBPixel[,] EncryptedImage, RGBPixel[,] OriginalImage, int N)
+        {
+            int Height = ImageOperations.GetHeight(EncryptedImage);
+            int Width = ImageOperations.GetWidth(EncryptedImage);
+
+            
+            return solve(EncryptedImage,OriginalImage,new StringBuilder(), N);
+
+        }
+
+        public static KeyValuePair<string,int> solve(RGBPixel[,] EncryptedImage, RGBPixel[,] OriginalImage, StringBuilder currSeed, int N)
+        {
+            if(currSeed.Length > N)
+            {
+                return new KeyValuePair<string, int>("", -1);
+            }
+            if(currSeed.Length == N)
+            {
+                int Height = ImageOperations.GetHeight(EncryptedImage);
+                int Width = ImageOperations.GetWidth(EncryptedImage);
+
+                for (int i = 0; i < N; i++)
+                {
+                    string seed = currSeed.ToString();
+                    RGBPixel[,] DecryptedImage = Decrypt(EncryptedImage, seed, i);
+                    if (ImageOperations.CompareTwoImages(DecryptedImage, OriginalImage))
+                    {
+                        return new KeyValuePair<string, int>(seed,i);
+                    }
+                }
+            }
+
+            currSeed.Append('0');
+            int currIndex = currSeed.Length - 1;
+            KeyValuePair<string,int> ret1 = solve(EncryptedImage, OriginalImage, currSeed, N);
+            currSeed.Remove(currIndex, currSeed.Length - currIndex);
+            currSeed.Append('1');
+            currIndex = currSeed.Length - 1;
+            KeyValuePair<string, int> ret2 = solve(EncryptedImage, OriginalImage, currSeed, N);
+            currSeed.Remove(currIndex, currSeed.Length - currIndex);
+            if (!ret1.Key.Equals("")) return ret1;
+            if (!ret2.Key.Equals("")) return ret2;
+            return new KeyValuePair<string, int>("",-1);
         }
     }
 }
