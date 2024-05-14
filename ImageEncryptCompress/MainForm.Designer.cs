@@ -48,6 +48,7 @@ namespace ImageEncryptCompress
             this.breakNTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.breakEncryptionButton = new System.Windows.Forms.Button();
+            this.openPictureBox2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
@@ -257,12 +258,24 @@ namespace ImageEncryptCompress
             this.breakEncryptionButton.UseVisualStyleBackColor = true;
             this.breakEncryptionButton.Click += new System.EventHandler(this.breakEncryptionButton_Click);
             // 
+            // openPictureBox2
+            // 
+            this.openPictureBox2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openPictureBox2.Location = new System.Drawing.Point(1167, 389);
+            this.openPictureBox2.Name = "openPictureBox2";
+            this.openPictureBox2.Size = new System.Drawing.Size(94, 72);
+            this.openPictureBox2.TabIndex = 32;
+            this.openPictureBox2.Text = "Open Image";
+            this.openPictureBox2.UseVisualStyleBackColor = true;
+            this.openPictureBox2.Click += new System.EventHandler(this.openPictureBox2_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1335, 681);
+            this.Controls.Add(this.openPictureBox2);
             this.Controls.Add(this.breakEncryptionButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.breakNTextBox);
@@ -316,6 +329,7 @@ namespace ImageEncryptCompress
         private System.Windows.Forms.TextBox breakNTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button breakEncryptionButton;
+        private System.Windows.Forms.Button openPictureBox2;
     }
 }
 

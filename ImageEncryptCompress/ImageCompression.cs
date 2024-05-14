@@ -68,29 +68,32 @@ namespace ImageEncryptCompress
             {
                 for (int j = 0; j < col; j++)
                 {
+                    //O(1)
                     if (!BlueFrequency.ContainsKey(Image[i, j].blue))
                     {
-                        BlueFrequency.Add(Image[i, j].blue, 1);
+                        BlueFrequency.Add(Image[i, j].blue, 1);//O(1)
                     }
                     else
                     {
-                        BlueFrequency[Image[i, j].blue]++;
+                        BlueFrequency[Image[i, j].blue]++;//O(1)
                     }
+                    //O(1)
                     if (!RedFrequency.ContainsKey(Image[i, j].red))
                     {
-                        RedFrequency.Add(Image[i, j].red, 1);
+                        RedFrequency.Add(Image[i, j].red, 1);//O(1)
                     }
                     else
                     {
-                        RedFrequency[Image[i, j].red]++;
+                        RedFrequency[Image[i, j].red]++;//O(1)
                     }
+                    //O(1)
                     if (!GreenFrequency.ContainsKey(Image[i, j].green))
                     {
-                        GreenFrequency.Add(Image[i, j].green, 1);
+                        GreenFrequency.Add(Image[i, j].green, 1);//O(1)
                     }
                     else
                     {
-                        GreenFrequency[Image[i, j].green]++;
+                        GreenFrequency[Image[i, j].green]++;//O(1)
                     }
                 }
             }
@@ -103,7 +106,7 @@ namespace ImageEncryptCompress
             currCode.Append('0');//O(1)
             int currIndex = currCode.Length-1;
             SaveTreeIntoFile(binaryWriter, root.left, CompressionEncoding, currCode);
-            currCode.Remove(currIndex,currCode.Length - currIndex);
+            currCode.Remove(currIndex,currCode.Length - currIndex);//O(1)
             currCode.Append('1');//O(1)
             currIndex = currCode.Length - 1;
             SaveTreeIntoFile(binaryWriter, root.right, CompressionEncoding, currCode);
@@ -112,7 +115,7 @@ namespace ImageEncryptCompress
             {
 
                 List<byte> currCodeBytes = new List<byte>();
-                string toBeAddedCode = currCode.ToString();
+                string toBeAddedCode = currCode.ToString();//O(1)
                 int pads = 8 - currCode.Length % 8;
                 if (pads != 8)
                 {
@@ -128,7 +131,7 @@ namespace ImageEncryptCompress
                 }
                 binaryWriter.Write((byte)pads);
                 binaryWriter.Write((byte)currCodeBytes.Count);//to be optimized
-                binaryWriter.Write(currCodeBytes.ToArray());
+                binaryWriter.Write(currCodeBytes.ToArray());//O(1)
                 binaryWriter.Write((byte)root.value);
                 CompressionEncoding.Add((byte)root.value, toBeAddedCode);//O(1)
             }
@@ -165,21 +168,21 @@ namespace ImageEncryptCompress
             //O(C*log(C))
             foreach (KeyValuePair<byte, int> item in ColorFequency)
             {
-                node = new Node(item.Key, item.Value);
-                priorityQueue.Enqueue(node);
+                node = new Node(item.Key, item.Value);//O(1)
+                priorityQueue.Enqueue(node);//O(log(C))
             }
             Node minim, secondMinim,parent;
             //O(C*log(C))
             while (priorityQueue.Count > 1)
             {
-                minim = priorityQueue.Dequeue();
-                secondMinim = priorityQueue.Dequeue();
+                minim = priorityQueue.Dequeue();//O(log(C))
+                secondMinim = priorityQueue.Dequeue();//O(log(C))
 
-                parent = new Node(-1, minim.frequency + secondMinim.frequency);
-                parent.right = minim;
-                parent.left = secondMinim;
+                parent = new Node(-1, minim.frequency + secondMinim.frequency);//O(1)
+                parent.left = minim;//O(1)
+                parent.right = secondMinim;//O(1)
 
-                priorityQueue.Enqueue(parent);
+                priorityQueue.Enqueue(parent);//O(log(C))
 
             }
             //O(log(C))
@@ -188,9 +191,9 @@ namespace ImageEncryptCompress
 
         private static void HuffmanEncode()
         {
-            redRoot = BuildTree(RedFrequency);
-            greenRoot = BuildTree(GreenFrequency);
-            blueRoot = BuildTree(BlueFrequency);
+            redRoot = BuildTree(RedFrequency);//O(C*log(C))
+            greenRoot = BuildTree(GreenFrequency);//O(C*log(C))
+            blueRoot = BuildTree(BlueFrequency);//O(C*log(C))
         }
 
         private static string ReplaceBinaryCode(RGBPixel[,] Image, Dictionary<byte, string> Encoding, Func<RGBPixel, byte> colorSelector)
@@ -199,17 +202,15 @@ namespace ImageEncryptCompress
             int rows = Image.GetLength(0);
             int cols = Image.GetLength(1);
             StringBuilder binaryCode = new StringBuilder();
-            int ctr = 0;
             //O(H*W)
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    byte color = colorSelector(Image[i, j]);
-                    if (Encoding.ContainsKey(color))
+                    byte color = colorSelector(Image[i, j]);//O(1)
+                    if (Encoding.ContainsKey(color))//O(1)
                     {
-                        ctr += Encoding[color].Length;
-                        binaryCode.Append(Encoding[color]);
+                        binaryCode.Append(Encoding[color]);//O(1)
                     }
                 }
             }
@@ -260,6 +261,7 @@ namespace ImageEncryptCompress
             long totalAfterCompressionInBytes = 0;
             using (BinaryWriter binaryWriter = new BinaryWriter(new FileStream(filePath, FileMode.Create), Encoding.UTF8))
             {
+                //?????
                 binaryWriter.Write(initalSeed);
                 binaryWriter.Write(tapPosition);
                 binaryWriter.Write(RowSize);
@@ -369,11 +371,11 @@ namespace ImageEncryptCompress
             {
 
                 currBits.Append(bits[i]);
-                temp = currBits.ToString();
-                if (Encoding.ContainsKey(temp))
+                temp = currBits.ToString();//O(1) because the max length of this string is 256 but it will always be less than that
+                if (Encoding.ContainsKey(temp))//O(1)
                 {
-                    if (Color.Equals('r'))
-                        Image[pixelRow, pixelCol].red = Encoding[temp];
+                    if (Color.Equals('r'))//O(1)
+                        Image[pixelRow, pixelCol].red = Encoding[temp];//O(1)
                     else if (Color.Equals('g'))
                         Image[pixelRow, pixelCol].green = Encoding[temp];
                     else
@@ -386,7 +388,7 @@ namespace ImageEncryptCompress
                     }
                     else
                         pixelCol++;
-                    currBits.Clear();
+                    currBits.Clear();//O(1)
 
                 }
             }
@@ -420,7 +422,7 @@ namespace ImageEncryptCompress
             HuffmanEncode();//O(C*log(C))
             int RowSize = Image.GetLength(0);//O(1)
             int ColSize = Image.GetLength(1);//O(1)
-            return SaveImageIntoFile(Image, RowSize, ColSize, FileToBeCompressedPath,initialSeed,tapPosition);//O(H*W + C)
+            return SaveImageIntoFile(Image, RowSize, ColSize, FileToBeCompressedPath,initialSeed,tapPosition);//O(H*W)
 
         }
         public static RGBPixel[,] Decompress(string compressedFilePath,out string initialSeed , out int tapPosition)
@@ -437,7 +439,7 @@ namespace ImageEncryptCompress
                 RowSize = binaryReader.ReadInt32();
                 ColSize = binaryReader.ReadInt32();
                 //ReadTreesFromFile(binaryReader);
-                OriginalImage = GetImageFromDecompressedFile(binaryReader);
+                OriginalImage = GetImageFromDecompressedFile(binaryReader);//O(H*W)
             }
             return OriginalImage;
         }

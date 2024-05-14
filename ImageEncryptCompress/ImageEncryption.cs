@@ -144,8 +144,8 @@ namespace ImageEncryptCompress
             {
                 if (seed[i] != '0' && seed[i] != '1')
                 {
-                    string BinaryString = Convert.ToString(seed[i], 2).PadLeft(8, '0');
-                    seedBuilder.Append(BinaryString);//O(1) --> 8 characters always
+                    string BinaryString = Convert.ToString(seed[i], 2);//O(1) --> 8 characters maximum
+                    seedBuilder.Append(BinaryString);//O(1) --> 8 characters maximum
                 }
                 else
                     seedBuilder.Append(seed[i]);//O(1)

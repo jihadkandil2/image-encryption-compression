@@ -97,6 +97,7 @@ namespace ImageEncryptCompress
             
             stopwatch.Start();
             DecryptedImage = ImageEncryption.Decrypt(EncryptedImage, initialSeed, tapPosition);
+            EncryptedImage = DecryptedImage;
             stopwatch.Stop();
             backwardTime += stopwatch.ElapsedMilliseconds;
             ImageOperations.DisplayImage(DecryptedImage, pictureBox2);
@@ -111,7 +112,35 @@ namespace ImageEncryptCompress
 
             double sizeBeforCompressionBytes = 0.0;
             double sizeAfterCompressionBytes = 0.0;
-            if (CompressExistedImage.Checked)
+            if(pictureBox1.Image == null)
+            {
+                FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+                string CompressedFilePath;
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    CompressedFilePath = folderBrowserDialog1.SelectedPath + "\\CompressedImage.bin";
+                    if (CompressedFilePath == null || CompressedFilePath.Equals(""))
+                    {
+                        MessageBox.Show("Please select a folder to create the compressed file at!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Unexpected Error!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                sizeBeforCompressionBytes = ((double)ImageOperations.GetHeight(OriginalImage) * (double)ImageOperations.GetWidth(OriginalImage) * 3.0);
+                stopwatch.Start();
+                sizeAfterCompressionBytes = 1024.0 * ImageCompression.Compress(OriginalImage, CompressedFilePath, initialSeed, tapPosition);
+                stopwatch.Stop();
+                MessageBox.Show("Compression Ratio: " + (sizeAfterCompressionBytes / sizeBeforCompressionBytes) * 100 + " %");
+                MessageBox.Show("BINARY FILE FROM " + sizeBeforCompressionBytes + " bytes to : " + sizeAfterCompressionBytes + " bytes");
+                MessageBox.Show("COMPRESSION TIME : " + stopwatch.ElapsedMilliseconds.ToString());
+                MessageBox.Show("ELAPSED TIME AFTER FORWARD TOTAL IS : " + forwardTime);
+
+            }
+            else if (CompressExistedImage.Checked)
             {
                 if (EncryptedImage == null)
                 {
@@ -139,6 +168,7 @@ namespace ImageEncryptCompress
                 sizeAfterCompressionBytes = 1024.0 * ImageCompression.Compress(EncryptedImage, CompressedFilePath, initialSeed, tapPosition);
                 stopwatch.Stop();
                 forwardTime += stopwatch.ElapsedMilliseconds;
+                MessageBox.Show("Compression Ratio: " + (sizeAfterCompressionBytes / sizeBeforCompressionBytes) * 100 + " %");
                 MessageBox.Show("BINARY FILE FROM " + sizeBeforCompressionBytes + " bytes to : " + sizeAfterCompressionBytes + " bytes");
                 MessageBox.Show("COMPRESSION TIME : " + stopwatch.ElapsedMilliseconds.ToString());
                 MessageBox.Show("ELAPSED TIME AFTER FORWARD TOTAL IS : " + forwardTime);
@@ -169,7 +199,8 @@ namespace ImageEncryptCompress
 
         private void CompareImagesButton_Click(object sender, EventArgs e)
         {
-            bool imagesMatch = ImageOperations.CompareTwoImages(DecryptedImage, OriginalImage);
+            RGBPixel[,] PictureBox2Image = DecryptedImage != null ? DecryptedImage : EncryptedImage;
+            bool imagesMatch = ImageOperations.CompareTwoImages(PictureBox2Image, OriginalImage);
             if (imagesMatch)
             {
                 MessageBox.Show("The images match!", "Image Comparison Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -204,6 +235,44 @@ namespace ImageEncryptCompress
             MessageBox.Show("Initial Seed : " + result.Key + " , Tap Position : " + result.Value);
             MessageBox.Show("BREAKING ENCRYPTION DONE after " + stopwatch.ElapsedMilliseconds + " ms");
 
+        }
+
+        private void openPictureBox2_Click(object sender, EventArgs e)
+        {
+            string userInput_initial_seed = initial_seed.Text;
+            string userInput_tap_position = tap_position.Text;
+
+
+            if (userInput_initial_seed == "" || userInput_tap_position == "" || userInput_initial_seed == null || userInput_tap_position == null)
+            {
+                MessageBox.Show("Please enter the initial seed and tap position", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int parsedTapPosition = int.Parse(userInput_tap_position);
+            if (parsedTapPosition >= userInput_initial_seed.Length)
+            {
+                MessageBox.Show("Invalid Tap Position", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            initialSeed = userInput_initial_seed;
+            tapPosition = parsedTapPosition;
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "bmp files (*.bmp)|*.bmp|All files (*.*)|*.*";
+            openFileDialog1.RestoreDirectory = true;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //Open the browsed image and display it
+                string OpenedFilePath = openFileDialog1.FileName;
+                if (OpenedFilePath == null || OpenedFilePath.Equals(""))
+                {
+                    MessageBox.Show("Please select an image", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                OriginalImage = ImageOperations.OpenImage(OpenedFilePath);
+                ImageOperations.DisplayImage(OriginalImage, pictureBox2);
+            }
         }
 
         private void SaveImage(PictureBox pictureBox)
