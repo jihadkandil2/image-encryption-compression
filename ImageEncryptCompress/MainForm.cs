@@ -48,11 +48,13 @@ namespace ImageEncryptCompress
                     MessageBox.Show("Please select an image", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                double sizeBeforeCompressionInKB = (new FileInfo(OpenedFilePath).Length) / (1024.0);
                 OriginalImage = ImageOperations.OpenImage(OpenedFilePath);
+                double sizeBeforeCompressionInBytes = ImageOperations.GetHeight(OriginalImage) * ImageOperations.GetWidth(OriginalImage) * 3;
                 double sizeAfterCompression = ImageCompression.Compress(OriginalImage,CompressedFilePath);
+                double sizeAfterCompressionInBytes = sizeAfterCompression * 1024;
                 ImageOperations.DisplayImage(OriginalImage, pictureBox1);
-                MessageBox.Show("Compressed from (" +  sizeBeforeCompressionInKB +") KB" + " to (" + sizeAfterCompression + ") KB");
+                MessageBox.Show("Compression Ratio: " + (sizeAfterCompressionInBytes / sizeBeforeCompressionInBytes)*100 + " %");
+                MessageBox.Show("Compressed from (" +  sizeBeforeCompressionInBytes +") KB" + " to (" + sizeAfterCompression + ") KB");
             }
         }
 
