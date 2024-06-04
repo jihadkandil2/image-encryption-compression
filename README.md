@@ -4,7 +4,7 @@
 ### Problem Definition:-
 
 Image Encryption:
-The process of encoding an image in a manner that only authorized individuals can access it, typically through a password. Encryption ensures that the original image remains concealed unless decrypted with the correct key.
+The process of encoding an image in a manner that only authorized individuals can access it, typically through a password.
 
 Image Compression:
 Reducing the size of digital images to economize storage or transmission requirements. Compression methods aim to represent image data using fewer bits while preserving essential visual information.
